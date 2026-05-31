@@ -1,384 +1,467 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Mo — Data Analyst Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
-<style>
-:root{--bg:#0a0e1a;--surface:#111627;--card:#161d30;--border:#1e2a42;--blue:#3b82f6;--cyan:#06b6d4;--green:#10b981;--amber:#f59e0b;--red:#ef4444;--text:#e2e8f0;--muted:#64748b;--dim:#334155;}
-*{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;overflow-x:hidden;}
-body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;opacity:.2;pointer-events:none;z-index:0;}
-.wrap{max-width:1100px;margin:0 auto;padding:0 1.5rem;position:relative;z-index:1;}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-/* NAV */
-nav{position:sticky;top:0;z-index:100;background:rgba(10,14,26,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:.75rem 0;}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
-.nav-logo{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--cyan);font-weight:500;text-decoration:none;}
-.nav-links{display:flex;gap:1.5rem;list-style:none;}
-.nav-links a{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--muted);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .2s;}
-.nav-links a:hover{color:var(--cyan);}
+<title>Mohammed Salah | Data Analyst Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+  --bg:#050816;
+  --surface:#0f172a;
+  --card:#111827;
+  --primary:#22c55e;
+  --secondary:#06b6d4;
+  --text:#f8fafc;
+  --muted:#94a3b8;
+  --border:#1e293b;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+.container{
+  width:90%;
+  max-width:1200px;
+  margin:auto;
+}
+
+section{
+  padding:100px 0;
+}
+
+/* NAVBAR */
+
+nav{
+  position:fixed;
+  width:100%;
+  top:0;
+  background:rgba(5,8,22,.95);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  z-index:100;
+}
+
+.nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 0;
+}
+
+.logo{
+  font-size:1.3rem;
+  font-weight:800;
+  color:var(--primary);
+}
+
+.menu{
+  display:flex;
+  gap:25px;
+}
+
+.menu a{
+  color:var(--muted);
+  text-decoration:none;
+}
+
+.menu a:hover{
+  color:var(--secondary);
+}
 
 /* HERO */
-.hero{padding:5rem 0 3.5rem;position:relative;}
-.hero-glow{position:absolute;top:-80px;left:-150px;width:600px;height:450px;background:radial-gradient(ellipse,rgba(59,130,246,.1) 0%,transparent 70%);pointer-events:none;}
-.badge-row{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.75rem;}
-.badge{font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:500;padding:.22rem .65rem;border-radius:2px;border:1px solid;letter-spacing:.05em;text-transform:uppercase;}
-.badge-blue{color:var(--blue);border-color:rgba(59,130,246,.35);background:rgba(59,130,246,.08);}
-.badge-green{color:var(--green);border-color:rgba(16,185,129,.35);background:rgba(16,185,129,.08);}
-.badge-amber{color:var(--amber);border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.08);}
-.badge-cyan{color:var(--cyan);border-color:rgba(6,182,212,.35);background:rgba(6,182,212,.08);}
-h1{font-size:clamp(2.8rem,8vw,5rem);font-weight:800;line-height:1;letter-spacing:-.03em;margin-bottom:.5rem;}
-h1 span{background:linear-gradient(135deg,var(--blue) 0%,var(--cyan) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.hero-sub{font-family:'JetBrains Mono',monospace;font-size:.95rem;color:var(--muted);margin-bottom:2rem;}
-.pipeline{display:flex;align-items:center;flex-wrap:wrap;gap:.25rem;margin-top:2rem;}
-.pipe-step{font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:500;padding:.35rem .9rem;border:1px solid var(--border);background:var(--surface);color:var(--cyan);letter-spacing:.08em;text-transform:uppercase;}
-.pipe-arrow{font-family:'JetBrains Mono',monospace;color:var(--dim);font-size:.8rem;padding:0 .1rem;}
 
-/* SECTIONS */
-section{padding:3rem 0;border-top:1px solid var(--border);}
-.section-label{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:500;color:var(--blue);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.6rem;}
-.section-title{font-size:1.5rem;font-weight:700;letter-spacing:-.02em;margin-bottom:1.5rem;}
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+}
 
-/* STACK */
-.stack-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);}
-.stack-cell{background:var(--card);padding:1.25rem;}
-.stack-cell h4{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.85rem;}
-.tag-list{display:flex;flex-wrap:wrap;gap:.35rem;}
-.tag{font-family:'JetBrains Mono',monospace;font-size:.68rem;padding:.18rem .55rem;background:var(--surface);border:1px solid var(--border);color:var(--text);border-radius:2px;}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1fr 400px;
+  gap:60px;
+  align-items:center;
+}
 
-/* PROJECTS TABLE */
-.table-wrap{overflow-x:auto;border:1px solid var(--border);}
-table{width:100%;border-collapse:collapse;font-size:.85rem;}
-thead tr{background:var(--surface);border-bottom:1px solid var(--border);}
-thead th{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:500;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;padding:.8rem 1rem;text-align:left;white-space:nowrap;}
-tbody tr{border-bottom:1px solid var(--border);transition:background .15s;cursor:pointer;}
-tbody tr:hover{background:var(--surface);}
-tbody tr:last-child{border-bottom:none;}
-tbody td{padding:.8rem 1rem;vertical-align:middle;}
-.proj-num{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted);}
-.proj-name{color:var(--text);font-weight:600;}
-.proj-name.active{color:var(--cyan);}
-.proj-domain{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--cyan);white-space:nowrap;}
-.proj-n{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--amber);text-align:center;}
-.method-list{display:flex;flex-wrap:wrap;gap:.25rem;}
-.mtag{font-family:'JetBrains Mono',monospace;font-size:.62rem;padding:.12rem .4rem;background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);color:var(--blue);border-radius:2px;white-space:nowrap;}
-.hl-cell{font-size:.78rem;color:var(--muted);max-width:240px;}
-.status-done{color:var(--green);font-family:'JetBrains Mono',monospace;font-size:.7rem;}
-.status-pending{color:var(--dim);font-family:'JetBrains Mono',monospace;font-size:.7rem;}
-.dim-row td{opacity:.35;}
+.hero h1{
+  font-size:4rem;
+  margin-bottom:15px;
+}
 
-/* PROJECT DETAIL PANEL */
-.detail-panel{display:none;border:1px solid var(--border);background:var(--card);margin-top:1rem;overflow:hidden;}
-.detail-panel.open{display:block;}
-.detail-header{padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
-.detail-header h3{font-size:1.1rem;font-weight:700;color:var(--text);}
-.close-btn{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--muted);background:none;border:1px solid var(--border);padding:.3rem .7rem;cursor:pointer;color:var(--text);}
-.close-btn:hover{border-color:var(--cyan);color:var(--cyan);}
-.detail-body{padding:1.5rem;}
-.detail-meta{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.5rem;}
-.detail-meta span{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted);}
-.detail-meta span b{color:var(--text);}
-.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:1.5rem;}
-.stat-box{background:var(--surface);padding:1rem 1.25rem;}
-.stat-box .val{font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:700;color:var(--cyan);margin-bottom:.25rem;}
-.stat-box .lbl{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;}
-.findings-table{width:100%;border-collapse:collapse;font-size:.8rem;margin-bottom:1.5rem;}
-.findings-table th{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;padding:.6rem .75rem;text-align:left;border-bottom:1px solid var(--border);}
-.findings-table td{padding:.65rem .75rem;border-bottom:1px solid rgba(30,42,66,.5);color:var(--text);}
-.findings-table td:last-child{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--green);}
-.figures-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);}
-.fig-box{background:var(--surface);padding:1rem;}
-.fig-box img{width:100%;height:auto;display:block;}
-.fig-placeholder{width:100%;height:200px;background:var(--card);border:1px dashed var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:.7rem;text-align:center;}
-.fig-caption{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--muted);margin-top:.5rem;letter-spacing:.04em;}
+.hero span{
+  color:var(--primary);
+}
 
-/* METHOD CARDS */
-.method-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);}
-.method-card{background:var(--card);padding:1.25rem;}
-.method-card .icon{font-size:1.1rem;margin-bottom:.6rem;}
-.method-card h4{font-size:.88rem;font-weight:700;margin-bottom:.4rem;}
-.method-card p{font-size:.78rem;color:var(--muted);line-height:1.6;}
+.hero p{
+  color:var(--muted);
+  margin-bottom:30px;
+  font-size:1.1rem;
+}
 
-/* TREE */
-.tree{font-family:'JetBrains Mono',monospace;font-size:.78rem;line-height:2;color:var(--muted);background:var(--card);border:1px solid var(--border);padding:1.25rem 1.75rem;}
-.tree .dir{color:var(--cyan);}.tree .file{color:var(--text);}.tree .note{color:var(--dim);}.tree .hl{color:var(--blue);}
+.btn{
+  display:inline-block;
+  padding:14px 24px;
+  background:var(--primary);
+  color:black;
+  text-decoration:none;
+  border-radius:10px;
+  font-weight:700;
+  margin-right:10px;
+}
+
+.btn-outline{
+  background:transparent;
+  color:white;
+  border:1px solid var(--border);
+}
+
+.avatar{
+  width:320px;
+  height:320px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:5rem;
+  font-weight:800;
+}
+
+/* STATS */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+}
+
+.stat{
+  background:var(--card);
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+}
+
+.stat h2{
+  color:var(--primary);
+  font-size:2.5rem;
+}
+
+.stat p{
+  color:var(--muted);
+}
+
+/* CARDS */
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:25px;
+}
+
+.card{
+  background:var(--card);
+  padding:30px;
+  border-radius:20px;
+}
+
+.card h3{
+  margin-bottom:15px;
+}
+
+.card p{
+  color:var(--muted);
+}
+
+.section-title{
+  font-size:2.5rem;
+  margin-bottom:40px;
+}
+
+/* PROJECTS */
+
+.project{
+  background:var(--card);
+  padding:30px;
+  border-radius:20px;
+}
+
+.tag{
+  display:inline-block;
+  background:#0b3b2a;
+  color:var(--primary);
+  padding:6px 12px;
+  border-radius:30px;
+  margin-bottom:15px;
+}
+
+/* SKILLS */
+
+.skill{
+  margin-bottom:20px;
+}
+
+.skill-header{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.bar{
+  background:#1e293b;
+  height:10px;
+  border-radius:20px;
+}
+
+.fill{
+  height:100%;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
 
 /* FOOTER */
-footer{border-top:1px solid var(--border);padding:2rem 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
-footer p{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--muted);}
-.dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);margin-right:.4rem;animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
 
-/* FADE IN */
-.fade-in{opacity:0;transform:translateY(16px);animation:fadeUp .6s ease forwards;}
-@keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
-.d1{animation-delay:.1s;}.d2{animation-delay:.2s;}.d3{animation-delay:.3s;}.d4{animation-delay:.4s;}
-
-@media(max-width:640px){
-  .stack-grid{grid-template-columns:1fr;}
-  h1{font-size:2.5rem;}
-  .detail-meta{gap:.75rem;}
-  .figures-grid{grid-template-columns:1fr;}
+footer{
+  text-align:center;
+  padding:40px;
+  border-top:1px solid var(--border);
+  color:var(--muted);
 }
+
+@media(max-width:900px){
+
+.hero-grid{
+  grid-template-columns:1fr;
+  text-align:center;
+}
+
+.avatar{
+  margin:auto;
+}
+
+.stats{
+  grid-template-columns:repeat(2,1fr);
+}
+}
+
 </style>
-<base target="_blank">
 </head>
+
 <body>
 
-<!-- NAV -->
 <nav>
-  <div class="wrap nav-inner">
-    <a class="nav-logo" href="#">Mo · Data Analyst</a>
-    <ul class="nav-links">
-      <li><a href="#stack">Stack</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#approach">Approach</a></li>
-      <li><a href="#structure">Structure</a></li>
-    </ul>
-  </div>
+<div class="container nav">
+<div class="logo">Mohammed Salah</div>
+
+<div class="menu">
+<a href="#about">About</a>
+<a href="#projects">Projects</a>
+<a href="#skills">Skills</a>
+<a href="#contact">Contact</a>
+</div>
+</div>
 </nav>
 
-<div class="wrap">
+<section class="hero">
+<div class="container hero-grid">
 
-  <!-- HERO -->
-  <div class="hero">
-    <div class="hero-glow"></div>
-    <div class="badge-row fade-in">
-      <span class="badge badge-blue">IBM SPSS Statistics</span>
-      <span class="badge badge-green">Community Health</span>
-      <span class="badge badge-amber">45+ Projects</span>
-      <span class="badge badge-cyan">Sudan</span>
-    </div>
-    <h1 class="fade-in d1">Mo<br/><span>Data Analyst</span></h1>
-    <p class="hero-sub fade-in d2">Turning raw survey data into evidence that matters.</p>
-    <div class="pipeline fade-in d3">
-      <span class="pipe-step">Raw Data</span><span class="pipe-arrow">──►</span>
-      <span class="pipe-step">Clean</span><span class="pipe-arrow">──►</span>
-      <span class="pipe-step">Analyse</span><span class="pipe-arrow">──►</span>
-      <span class="pipe-step">Interpret</span><span class="pipe-arrow">──►</span>
-      <span class="pipe-step">Insight</span>
-    </div>
-  </div>
+<div>
+<h1>Data Analyst & <span>Public Health Researcher</span></h1>
 
-  <!-- STACK -->
-  <section id="stack" class="fade-in d4">
-    <p class="section-label">// 01 — Technical Stack</p>
-    <h2 class="section-title">Tools &amp; Methods</h2>
-    <div class="stack-grid">
-      <div class="stack-cell">
-        <h4>Statistical Methods</h4>
-        <div class="tag-list">
-          <span class="tag">Descriptive Statistics</span><span class="tag">Chi-Square χ²</span>
-          <span class="tag">Spearman ρ</span><span class="tag">Pearson r</span>
-          <span class="tag">Linear Regression</span><span class="tag">One-Way ANOVA</span>
-          <span class="tag">Cross-tabulation</span><span class="tag">Multiple-Response</span>
-          <span class="tag">Score Classification</span><span class="tag">Reliability Analysis</span>
-        </div>
-      </div>
-      <div class="stack-cell">
-        <h4>Data Characteristics</h4>
-        <div class="tag-list">
-          <span class="tag">Ordinal &amp; Nominal</span><span class="tag">Likert-scale</span>
-          <span class="tag">Multiple-response</span><span class="tag">Continuous Outcomes</span>
-          <span class="tag">Cross-sectional</span><span class="tag">KAP Surveys</span>
-          <span class="tag">Community Datasets</span><span class="tag">Epidemiological</span>
-          <span class="tag">Field Research</span><span class="tag">Health Outcomes</span>
-        </div>
-      </div>
-    </div>
-  </section>
+<p>
+Transforming survey data into meaningful evidence through
+advanced statistical analysis, epidemiological research,
+and data-driven decision making.
+</p>
 
-  <!-- PROJECTS -->
-  <section id="projects">
-    <p class="section-label">// 02 — Projects</p>
-    <h2 class="section-title">Analysis Portfolio</h2>
-    <p style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted);margin-bottom:1rem;">Click any completed project row to expand the full analysis.</p>
+<a href="#projects" class="btn">View Projects</a>
+<a href="#contact" class="btn btn-outline">Contact Me</a>
+</div>
 
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>#</th><th>Project</th><th>Domain</th><th>n</th>
-            <th>Key Methods</th><th>Highlight</th><th>Status</th>
-          </tr>
-        </thead>
-        <tbody id="projects-tbody">
-          <!-- Projects rendered dynamically from projects-data.js -->
-        </tbody>
-      </table>
-    </div>
+<div class="avatar">MS</div>
 
-    <!-- DETAIL PANELS CONTAINER -->
-    <div id="detail-panels"></div>
-  </section>
+</div>
+</section>
 
-  <!-- APPROACH -->
-  <section id="approach">
-    <p class="section-label">// 03 — Analytical Approach</p>
-    <h2 class="section-title">How Each Study is Conducted</h2>
-    <div class="method-grid">
-      <div class="method-card">
-        <div class="icon">01</div>
-        <h4>Data Cleaning</h4>
-        <p>Missing-value checks, outlier detection, reverse-coding, and consistency validation before any analysis begins.</p>
-      </div>
-      <div class="method-card">
-        <div class="icon">02</div>
-        <h4>Descriptive Profiling</h4>
-        <p>Frequencies, percentages, means and standard deviations to characterise the sample and key variables.</p>
-      </div>
-      <div class="method-card">
-        <div class="icon">03</div>
-        <h4>Inferential Testing</h4>
-        <p>Chi-square, correlation, regression and ANOVA to test hypotheses and quantify associations.</p>
-      </div>
-      <div class="method-card">
-        <div class="icon">04</div>
-        <h4>Visualisation</h4>
-        <p>Bar charts, cross-tabs, and regression plots exported from SPSS for clear reporting.</p>
-      </div>
-    </div>
-  </section>
+<section>
+<div class="container">
 
-  <!-- STRUCTURE -->
-  <section id="structure">
-    <p class="section-label">// 04 — Project Structure</p>
-    <h2 class="section-title">Repository Layout</h2>
-    <div class="tree">
-      <span class="dir">📁 project-name/</span><br/>
-      &nbsp;&nbsp;<span class="dir">├── data/</span> <span class="note">— raw + cleaned .sav files</span><br/>
-      &nbsp;&nbsp;<span class="dir">├── syntax/</span> <span class="note">— .sps analysis scripts</span><br/>
-      &nbsp;&nbsp;<span class="dir">├── output/</span> <span class="note">— tables, charts, model summaries</span><br/>
-      &nbsp;&nbsp;<span class="dir">└── report/</span> <span class="note">— findings write-up</span><br/>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── <span class="hl">01_descriptives.sps</span></span><br/>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── <span class="hl">02_chisquare.sps</span></span><br/>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── <span class="hl">03_regression.sps</span></span><br/>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">└── <span class="hl">figures/</span></span> <span class="note">— PNG exports from SPSS</span>
-    </div>
-  </section>
+<div class="stats">
 
-  <!-- FOOTER -->
-  <footer>
-    <p><span class="dot"></span>Available for analysis commissions</p>
-    <p>Omdurman, Sudan · IBM SPSS Statistics</p>
-  </footer>
+<div class="stat">
+<h2>45+</h2>
+<p>Projects</p>
+</div>
+
+<div class="stat">
+<h2>15K+</h2>
+<p>Participants</p>
+</div>
+
+<div class="stat">
+<h2>20+</h2>
+<p>Research Areas</p>
+</div>
+
+<div class="stat">
+<h2>100%</h2>
+<p>SPSS Focused</p>
+</div>
 
 </div>
 
-<!-- Load project data from external file -->
-<script src="projects-data.js"></script>
+</div>
+</section>
 
-<script>
-// ============================================================
-// RENDER PROJECTS TABLE
-// ============================================================
-function renderProjects() {
-  const tbody = document.getElementById('projects-tbody');
-  const panels = document.getElementById('detail-panels');
+<section id="about">
 
-  tbody.innerHTML = '';
-  panels.innerHTML = '';
+<div class="container">
 
-  // Render completed projects
-  projects.forEach((proj, idx) => {
-    const row = document.createElement('tr');
-    row.onclick = () => toggleDetail(proj.id);
-    row.id = `row-${proj.id}`;
-    row.innerHTML = `
-      <td class="proj-num">${String(idx + 1).padStart(2, '0')}</td>
-      <td><span class="proj-name active" id="name-${proj.id}">${proj.name}</span></td>
-      <td class="proj-domain">${proj.domain}</td>
-      <td class="proj-n">${proj.n}</td>
-      <td><div class="method-list">${proj.methods.map(m => `<span class="mtag">${m}</span>`).join('')}</div></td>
-      <td class="hl-cell">${proj.highlight}</td>
-      <td class="status-done">✦ done</td>
-    `;
-    tbody.appendChild(row);
+<h2 class="section-title">Research Specializations</h2>
 
-    // Render detail panel
-    const d = proj.detail;
-    const statsHtml = d.stats.map(s => `
-      <div class="stat-box"><div class="val">${s.val}</div><div class="lbl">${s.lbl}</div></div>
-    `).join('');
+<div class="grid">
 
-    const findingsHtml = d.findings.map(f => `
-      <tr><td>${f.analysis}</td><td>${f.method}</td><td>${f.result}</td></tr>
-    `).join('');
+<div class="card">
+<h3>Public Health</h3>
+<p>KAP surveys and community health research.</p>
+</div>
 
-    const figuresHtml = d.figures.map(fig => `
-      <div class="fig-box">
-        <div class="fig-placeholder">
-          [Figure placeholder]<br/>${fig.caption}
-        </div>
-        <p class="fig-caption">${fig.caption}</p>
-      </div>
-    `).join('');
+<div class="card">
+<h3>Epidemiology</h3>
+<p>Disease surveillance and risk factor analysis.</p>
+</div>
 
-    const panel = document.createElement('div');
-    panel.className = 'detail-panel';
-    panel.id = proj.id;
-    panel.innerHTML = `
-      <div class="detail-header">
-        <h3>${String(idx + 1).padStart(2, '0')} — ${proj.name}</h3>
-        <button class="close-btn" onclick="toggleDetail('${proj.id}')">✕ Close</button>
-      </div>
-      <div class="detail-body">
-        <div class="detail-meta">
-          <span><b>Sample:</b> ${d.sample}</span>
-          <span><b>Location:</b> ${d.location}</span>
-          <span><b>Design:</b> ${d.design}</span>
-          <span><b>Tool:</b> ${d.tool}</span>
-          <span><b>Topic:</b> ${d.topic}</span>
-        </div>
-        <div class="stats-row">${statsHtml}</div>
-        <table class="findings-table">
-          <thead><tr><th>Analysis</th><th>Method</th><th>Result</th></tr></thead>
-          <tbody>${findingsHtml}</tbody>
-        </table>
-        <p class="section-label" style="margin-bottom:.85rem;">Figures</p>
-        <div class="figures-grid">${figuresHtml}</div>
-      </div>
-    `;
-    panels.appendChild(panel);
-  });
+<div class="card">
+<h3>Community Medicine</h3>
+<p>Population health assessment and field studies.</p>
+</div>
 
-  // Render pending rows (fill to 45)
-  const totalRows = 45;
-  const currentCount = projects.length;
-  for (let i = currentCount + 1; i <= totalRows; i++) {
-    const row = document.createElement('tr');
-    row.className = 'dim-row';
-    row.innerHTML = `
-      <td class="proj-num">${String(i).padStart(2, '0')}</td>
-      <td><span style="color:var(--dim)">Coming soon</span></td>
-      <td class="proj-domain">—</td><td class="proj-n">—</td>
-      <td>—</td><td class="hl-cell">—</td>
-      <td class="status-pending">· pending</td>
-    `;
-    tbody.appendChild(row);
-  }
-}
+<div class="card">
+<h3>Medical Education</h3>
+<p>Student and healthcare education research.</p>
+</div>
 
-// ============================================================
-// TOGGLE DETAIL PANEL
-// ============================================================
-function toggleDetail(id) {
-  const panel = document.getElementById(id);
-  const allPanels = document.querySelectorAll('.detail-panel');
-  allPanels.forEach(p => { if (p.id !== id) p.classList.remove('open'); });
-  panel.classList.toggle('open');
-  if (panel.classList.contains('open')) {
-    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
-}
+</div>
 
-// ============================================================
-// INIT
-// ============================================================
-document.addEventListener('DOMContentLoaded', renderProjects);
-</script>
+</div>
+
+</section>
+
+<section id="projects">
+
+<div class="container">
+
+<h2 class="section-title">Featured Projects</h2>
+
+<div class="grid">
+
+<div class="project">
+<div class="tag">Public Health</div>
+<h3>Dengue Fever Awareness Study</h3>
+<p>
+Assessment of knowledge, attitudes and preventive
+practices among university students.
+</p>
+</div>
+
+<div class="project">
+<div class="tag">Diabetes</div>
+<h3>Knowledge Assessment Survey</h3>
+<p>
+Evaluation of awareness and preventive behaviors.
+</p>
+</div>
+
+<div class="project">
+<div class="tag">Medical Education</div>
+<h3>Student Performance Analysis</h3>
+<p>
+Exploring academic factors and educational outcomes.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="skills">
+
+<div class="container">
+
+<h2 class="section-title">Skills</h2>
+
+<div class="skill">
+<div class="skill-header">
+<span>IBM SPSS</span>
+<span>95%</span>
+</div>
+<div class="bar"><div class="fill" style="width:95%"></div></div>
+</div>
+
+<div class="skill">
+<div class="skill-header">
+<span>Statistical Analysis</span>
+<span>92%</span>
+</div>
+<div class="bar"><div class="fill" style="width:92%"></div></div>
+</div>
+
+<div class="skill">
+<div class="skill-header">
+<span>Research Methodology</span>
+<span>95%</span>
+</div>
+<div class="bar"><div class="fill" style="width:95%"></div></div>
+</div>
+
+</div>
+
+</section>
+
+<section id="contact">
+
+<div class="container">
+
+<h2 class="section-title">Contact</h2>
+
+<div class="card">
+<h3>Let's Work Together</h3>
+<p>
+Available for research analysis, SPSS consultation,
+thesis support, and public health studies.
+</p>
+
+<br>
+
+<p>Email: your@email.com</p>
+<p>GitHub: github.com/yourusername</p>
+</div>
+
+</div>
+
+</section>
+
+<footer>
+© 2026 Mohammed Salah • Data Analyst Portfolio
+</footer>
 
 </body>
 </html>
+```
