@@ -75,29 +75,27 @@ I work with community health and behavioural survey data — from messy field re
 
 ## 📂 Projects
 
----
+> 🔍 Click any project title to view the full analysis — methods, figures, and interpretation.
 
-### `01` — War Psychology KAP Study
+| # | Project | Domain | n | Key Methods | Highlight | Status |
+|:---:|---|---|:---:|---|---|:---:|
+| [01](./01_war-psychology-KAP/README.md) | **War Psychology KAP Study** | Community Health | 300 | Chi-Square · Spearman ρ · Regression · ANOVA | 97.7% good knowledge · only 4.3% sought professional help | ✅ |
+| 02 | *(Coming soon)* | — | — | — | — | 🔄 |
+| 03 | *(Coming soon)* | — | — | — | — | 🔄 |
 
-> *Knowledge, Attitudes & Practices regarding psychological effects of war among Sudanese secondary school students*
+<details>
+<summary><b>📌 Column Guide</b></summary>
 
-```
-n = 300  |  Omdurman, Sudan  |  Cross-sectional survey
-```
+| Column | Meaning |
+|---|---|
+| **#** | Project number — links to full analysis folder |
+| **Domain** | Subject area of the dataset |
+| **n** | Sample size |
+| **Key Methods** | Statistical techniques applied |
+| **Highlight** | Single most important finding |
+| **Status** | ✅ Complete · 🔄 In progress · ⏸ On hold |
 
-**Highlights:**
-- 🔴 65.7% of students witnessed shelling or gunfire directly
-- 📈 Strong knowledge–attitude correlation despite ceiling effect on knowledge
-- 🏥 Only **4.3%** ever consulted a mental health professional
-- 📉 Regression R²=0.044 — honestly reported and interpreted as weak predictive power
-
-📁 **[View full analysis →](./01_war-psychology-KAP/README.md)**
-
----
-
-### `02` — *(Next project)*
-
-> *Coming soon*
+</details>
 
 ---
 
