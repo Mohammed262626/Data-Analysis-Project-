@@ -77,9 +77,9 @@ I work with community health and behavioural survey data — from messy field re
 
 > 🔍 Click any project title to view the full analysis — methods, figures, and interpretation.
 
-| # | Project | Domain | n | Key Methods | Highlight | Status |
-|:---:|---|---|:---:|---|---|:---:|
-| [01](./01_war-psychology-KAP/README.md) | **War Psychology KAP Study** | Community Health | 300 | Chi-Square · Spearman ρ · Regression · ANOVA | 97.7% good knowledge · only 4.3% sought professional help | ✅ |
+| # | Project | Domain | n | Key Methods | Status |
+|:---:|---|---|:---:|---|:---:|
+| [01](./01_war-psychology-KAP/README.md) | **War Psychology KAP Study** | Community Health | 300 | Chi-Square · Spearman ρ · Regression · ANOVA | ✅ |
 | 02 | *(Coming soon)* | — | — | — | — | 🔄 |
 | 03 | *(Coming soon)* | — | — | — | — | 🔄 |
 
