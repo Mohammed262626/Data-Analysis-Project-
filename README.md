@@ -85,14 +85,6 @@ I work with community health and behavioural survey data — from messy field re
 n = 300  |  Omdurman, Sudan  |  Cross-sectional survey
 ```
 
-| Analysis | Method | Key Finding |
-|---|---|---|
-| Knowledge distribution | Descriptive + cut-points | 97.7% good knowledge · Mean 19.41/21 |
-| Attitude distribution | Descriptive + cut-points | 88.0% very positive · Mean 24.77/28 |
-| Knowledge × Attitude | Chi-Square + Spearman ρ | χ²=80.744, p<.001 · ρ=0.328 |
-| Knowledge × Practices | Chi-Square (×7 tests) | All significant, p<.05 |
-| Coping → Knowledge | Multiple Regression + ANOVA | R²=0.044 · F(6,293)=2.270 · p=.037 |
-
 **Highlights:**
 - 🔴 65.7% of students witnessed shelling or gunfire directly
 - 📈 Strong knowledge–attitude correlation despite ceiling effect on knowledge
