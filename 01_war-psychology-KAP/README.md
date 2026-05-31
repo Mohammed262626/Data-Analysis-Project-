@@ -46,7 +46,7 @@ This project involved full statistical analysis of a cross-sectional KAP survey 
 
 ### Figure 1 — War Exposure Profile
 
-![War Exposure](figures/fig1_war_exposure.png)
+![War Exposure](./figures/fig1_war_exposure.png)
 
 The majority of students experienced direct war-related trauma. Witnessing shelling or gunfire was the most prevalent exposure (65.7%), and only 6.3% reported no exposure whatsoever.
 
