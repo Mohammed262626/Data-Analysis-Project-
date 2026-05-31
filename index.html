@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mo — Data Analyst Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg:       #0a0e1a;
+    --surface:  #111627;
+    --card:     #161d30;
+    --border:   #1e2a42;
+    --blue:     #3b82f6;
+    --cyan:     #06b6d4;
+    --green:    #10b981;
+    --amber:    #f59e0b;
+    --red:      #ef4444;
+    --text:     #e2e8f0;
+    --muted:    #64748b;
+    --dim:      #334155;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE GRAIN ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── GRID LINES ── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.25;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 6rem 0 4rem;
+    position: relative;
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: -100px; left: -200px;
+    width: 700px; height: 500px;
+    background: radial-gradient(ellipse, rgba(59,130,246,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    padding: 0.25rem 0.75rem;
+    border-radius: 2px;
+    border: 1px solid;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .badge-blue  { color: var(--blue);  border-color: rgba(59,130,246,0.35);  background: rgba(59,130,246,0.08); }
+  .badge-green { color: var(--green); border-color: rgba(16,185,129,0.35);  background: rgba(16,185,129,0.08); }
+  .badge-amber { color: var(--amber); border-color: rgba(245,158,11,0.35);  background: rgba(245,158,11,0.08); }
+  .badge-cyan  { color: var(--cyan);  border-color: rgba(6,182,212,0.35);   background: rgba(6,182,212,0.08); }
+
+  .hero h1 {
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero h1 span {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--cyan) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    letter-spacing: 0.02em;
+  }
+
+  .pipeline {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    margin-top: 2.5rem;
+  }
+
+  .pipe-step {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--cyan);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .pipe-arrow {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--dim);
+    padding: 0 0.25rem;
+    font-size: 0.85rem;
+  }
+
+  /* ── SECTION ── */
+  section { padding: 3.5rem 0; border-top: 1px solid var(--border); }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--blue);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.75rem;
+  }
+
+  /* ── STACK GRID ── */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .stack-cell {
+    background: var(--card);
+    padding: 1.5rem;
+  }
+
+  .stack-cell h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    padding: 0.2rem 0.6rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 2px;
+  }
+
+  /* ── PROJECTS TABLE ── */
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  thead tr {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+
+  thead th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.85rem 1rem;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+
+  tbody tr:hover { background: var(--surface); }
+  tbody tr:last-child { border-bottom: none; }
+
+  tbody td {
+    padding: 0.85rem 1rem;
+    color: var(--text);
+    vertical-align: middle;
+  }
+
+  .proj-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .proj-link {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.15s;
+  }
+  .proj-link:hover { color: var(--cyan); }
+
+  .proj-domain {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--cyan);
+    white-space: nowrap;
+  }
+
+  .proj-n {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--amber);
+    text-align: center;
+  }
+
+  .method-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+
+  .mtag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    padding: 0.15rem 0.45rem;
+    background: rgba(59,130,246,0.08);
+    border: 1px solid rgba(59,130,246,0.2);
+    color: var(--blue);
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+
+  .highlight-cell {
+    font-size: 0.8rem;
+    color: var(--muted);
+    max-width: 260px;
+  }
+
+  .status-done    { color: var(--green); font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; }
+  .status-wip     { color: var(--amber); font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; }
+  .status-hold    { color: var(--muted); font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; }
+  .status-pending { color: var(--dim);   font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; }
+
+  .dim-row td { opacity: 0.4; }
+
+  /* ── METHODOLOGY ── */
+  .method-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .method-card {
+    background: var(--card);
+    padding: 1.5rem;
+  }
+
+  .method-card .icon {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .method-card h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+
+  .method-card p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── STRUCTURE ── */
+  .tree {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    line-height: 1.9;
+    color: var(--muted);
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 1.5rem 2rem;
+  }
+
+  .tree .dir  { color: var(--cyan); }
+  .tree .file { color: var(--text); }
+  .tree .note { color: var(--dim); }
+  .tree .hl   { color: var(--blue); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  footer p {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+
+  footer .dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    margin-right: 0.5rem;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: fadeUp 0.6s ease forwards;
+  }
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+
+  @media (max-width: 640px) {
+    .stack-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2.8rem; }
+    .pipeline { gap: 0.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-glow"></div>
+
+    <div class="badge-row fade-in">
+      <span class="badge badge-blue">IBM SPSS Statistics</span>
+      <span class="badge badge-green">Community Health</span>
+      <span class="badge badge-amber">45+ Projects</span>
+      <span class="badge badge-cyan">Sudan</span>
+    </div>
+
+    <h1 class="fade-in delay-1">Mo<br/><span>Data Analyst</span></h1>
+    <p class="hero-sub fade-in delay-2">Turning raw survey data into evidence that matters.</p>
+
+    <div class="pipeline fade-in delay-3">
+      <span class="pipe-step">Raw Data</span>
+      <span class="pipe-arrow">──►</span>
+      <span class="pipe-step">Clean</span>
+      <span class="pipe-arrow">──►</span>
+      <span class="pipe-step">Analyse</span>
+      <span class="pipe-arrow">──►</span>
+      <span class="pipe-step">Interpret</span>
+      <span class="pipe-arrow">──►</span>
+      <span class="pipe-step">Insight</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════ STACK ═══════════════ -->
+  <section class="fade-in delay-4">
+    <p class="section-label">// 01 — Technical Stack</p>
+    <h2 class="section-title">Tools &amp; Methods</h2>
+
+    <div class="stack-grid">
+      <div class="stack-cell">
+        <h4>Statistical Methods</h4>
+        <div class="tag-list">
+          <span class="tag">Descriptive Statistics</span>
+          <span class="tag">Chi-Square χ²</span>
+          <span class="tag">Spearman ρ</span>
+          <span class="tag">Pearson r</span>
+          <span class="tag">Linear Regression</span>
+          <span class="tag">One-Way ANOVA</span>
+          <span class="tag">Cross-tabulation</span>
+          <span class="tag">Multiple-Response</span>
+          <span class="tag">Score Classification</span>
+          <span class="tag">Reliability Analysis</span>
+        </div>
+      </div>
+      <div class="stack-cell">
+        <h4>Data Characteristics</h4>
+        <div class="tag-list">
+          <span class="tag">Ordinal &amp; Nominal</span>
+          <span class="tag">Likert-scale</span>
+          <span class="tag">Multiple-response</span>
+          <span class="tag">Continuous Outcomes</span>
+          <span class="tag">Cross-sectional</span>
+          <span class="tag">KAP Surveys</span>
+          <span class="tag">Community Datasets</span>
+          <span class="tag">Epidemiological</span>
+          <span class="tag">Field Research</span>
+          <span class="tag">Health Outcomes</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ PROJECTS ═══════════════ -->
+  <section>
+    <p class="section-label">// 02 — Projects</p>
+    <h2 class="section-title">Analysis Portfolio</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Project</th>
+            <th>Domain</th>
+            <th>n</th>
+            <th>Key Methods</th>
+            <th>Highlight</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <!-- ── COMPLETE ── -->
+          <tr>
+            <td class="proj-num">01</td>
+            <td><a class="proj-link" href="./01_war-psychology-KAP/README.md">War Psychology KAP Study</a></td>
+            <td class="proj-domain">Community Health</td>
+            <td class="proj-n">300</td>
+            <td><div class="method-list">
+              <span class="mtag">Chi-Square</span>
+              <span class="mtag">Spearman ρ</span>
+              <span class="mtag">Regression</span>
+              <span class="mtag">ANOVA</span>
+            </div></td>
+            <td class="highlight-cell">97.7% good knowledge · only 4.3% sought professional help</td>
+            <td class="status-done">✦ done</td>
+          </tr>
+
+          <!-- ── PLACEHOLDERS ── -->
+          <tr class="dim-row">
+            <td class="proj-num">02</td>
+            <td><span style="color:var(--dim)">Coming soon</span></td>
+            <td class="proj-domain">—</td>
+            <td class="proj-n">—</td>
+            <td>—</td>
+            <td class="highlight-cell">—</td>
+            <td class="status-pending">· pending</td>
+          </tr>
+          <tr class="dim-row">
+            <td class="proj-num">03</td>
+            <td><span style="color:var(--dim)">Coming soon</span></td>
+            <td class="proj-domain">—</td>
+            <td class="proj-n">—</td>
+            <td>—</td>
+            <td class="highlight-cell">—</td>
+            <td class="status-pending">· pending</td>
+          </tr>
+          <tr class="dim-row">
+            <td class="proj-num">04</td>
+            <td><span style="color:var(--dim)">Coming soon</span></td>
+            <td class="proj-domain">—</td>
+            <td class="proj-n">—</td>
+            <td>—</td>
+            <td class="highlight-cell">—</td>
+            <td class="status-pending">· pending</td>
+          </tr>
+          <tr class="dim-row">
+            <td class="proj-num">05</td>
+            <td><span style="color:var(--dim)">Coming soon</span></td>
+            <td class="proj-domain">—</td>
+            <td class="proj-n">—</td>
+            <td>—</td>
+            <td class="highlight-cell">—</td>
+            <td class="status-pending">· pending</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--muted); margin-top:0.75rem;">
+      44 more rows to be filled as projects are documented.
+    </p>
+  </section>
+
+  <!-- ═══════════════ METHODOLOGY ═══════════════ -->
+  <section>
+    <p class="section-label">// 03 — Approach</p>
+    <h2 class="section-title">Analyst Principles</h2>
+
+    <div class="method-grid">
+      <div class="method-card">
+        <div class="icon">⚠️</div>
+        <h4>Assumption Checking First</h4>
+        <p>Chi-square expected cell counts, regression residuals, and collinearity are verified before any result is reported.</p>
+      </div>
+      <div class="method-card">
+        <div class="icon">📉</div>
+        <h4>Honest R²</h4>
+        <p>A weak model is reported as weak — with a clear explanation of what unmeasured factors likely account for the missing variance.</p>
+      </div>
+      <div class="method-card">
+        <div class="icon">📏</div>
+        <h4>Effect Size Alongside p-values</h4>
+        <p>Statistical significance alone does not determine practical importance. Both are always reported together.</p>
+      </div>
+      <div class="method-card">
+        <div class="icon">🔢</div>
+        <h4>Multiple-Response Handling</h4>
+        <p>Items are converted to binary dummies before frequency analysis — never treated as single-choice variables.</p>
+      </div>
+      <div class="method-card">
+        <div class="icon">📊</div>
+        <h4>Ceiling / Floor Effects</h4>
+        <p>Flagged when present. They reduce correlation and regression power and are always noted in the interpretation.</p>
+      </div>
+      <div class="method-card">
+        <div class="icon">🗂️</div>
+        <h4>Reproducible Outputs</h4>
+        <p>Each project is documented with full methods, figures, and outputs — readable by another analyst without context.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ STRUCTURE ═══════════════ -->
+  <section>
+    <p class="section-label">// 04 — Repository</p>
+    <h2 class="section-title">Structure</h2>
+
+    <div class="tree">
+<span class="dir">data-analysis-portfolio/</span>
+│
+├── <span class="file hl">index.html</span>                       <span class="note">← You are here</span>
+│
+├── <span class="dir">01_war-psychology-KAP/</span>
+│   ├── <span class="file">README.md</span>                    <span class="note">← Full write-up + figures</span>
+│   ├── <span class="dir">figures/</span>                     <span class="note">← 7 visualisation PNGs</span>
+│   └── <span class="dir">outputs/</span>                     <span class="note">← Results document</span>
+│
+├── <span class="dir">02_[next-project]/</span>
+│   └── <span class="note">...</span>
+│
+└── <span class="dir">03_[next-project]/</span>
+    └── <span class="note">...</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer>
+    <p><span class="dot"></span>Active · Updated as projects are completed</p>
+    <p>Built with IBM SPSS · Documented for clarity · Sudan</p>
+  </footer>
+</div>
+
+</body>
+</html>
