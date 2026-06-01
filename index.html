@@ -308,13 +308,14 @@ function renderProjects() {
     `).join('');
 
     const figuresHtml = d.figures.map(fig => `
-      <div class="fig-box">
-        <div class="fig-placeholder">
-          [Figure placeholder]<br/>${fig.caption}
-        </div>
-        <p class="fig-caption">${fig.caption}</p>
-      </div>
-    `).join('');
+  <div class="fig-box">
+    ${fig.src ? 
+      `<img src="${fig.src}" alt="${fig.caption}" style="width:100%; height:auto; display:block; margin-bottom:0.5rem;"/>` : 
+      `<div class="fig-placeholder">[Figure placeholder]<br/>${fig.caption}</div>`
+    }
+    <p class="fig-caption">${fig.caption}</p>
+  </div>
+`).join('');
 
     const panel = document.createElement('div');
     panel.className = 'detail-panel';
