@@ -1,5 +1,4 @@
-
-html = '''<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -92,6 +91,7 @@ tbody td{padding:.8rem 1rem;vertical-align:middle;}
 .figures-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);}
 .fig-box{background:var(--surface);padding:1rem;}
 .fig-box img{width:100%;height:auto;display:block;}
+.fig-placeholder{width:100%;height:200px;background:var(--card);border:1px dashed var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:.7rem;text-align:center;}
 .fig-caption{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--muted);margin-top:.5rem;letter-spacing:.04em;}
 
 /* METHOD CARDS */
@@ -123,6 +123,7 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--mut
   .figures-grid{grid-template-columns:1fr;}
 }
 </style>
+<base target="_blank">
 </head>
 <body>
 
@@ -204,7 +205,7 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--mut
           </tr>
         </thead>
         <tbody id="projects-tbody">
-          <!-- Projects rendered dynamically -->
+          <!-- Projects rendered dynamically from projects-data.js -->
         </tbody>
       </table>
     </div>
@@ -266,59 +267,20 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--mut
 
 </div>
 
-<script>
-// ============================================================
-// PROJECT DATA — add or edit projects here
-// ============================================================
-const projects = [
-  {
-    id: "p01",
-    name: "War Psychology KAP Study",
-    domain: "Community Health",
-    n: 300,
-    methods: ["Chi-Square", "Spearman ρ", "Regression", "ANOVA"],
-    highlight: "97.7% good knowledge · 4.3% sought professional help",
-    status: "done",
-    detail: {
-      sample: "300 students",
-      location: "Omdurman, Sudan",
-      design: "Cross-sectional survey",
-      tool: "IBM SPSS Statistics",
-      topic: "KAP — Psychological effects of war",
-      stats: [
-        { val: "97.7%", lbl: "Good Knowledge" },
-        { val: "88.0%", lbl: "Very Positive Attitude" },
-        { val: "65.7%", lbl: "Witnessed Shelling" },
-        { val: "4.3%", lbl: "Sought Professional Help" },
-        { val: "ρ=.328", lbl: "Knowledge–Attitude Corr." },
-        { val: "R²=.044", lbl: "Regression Variance" }
-      ],
-      findings: [
-        { analysis: "Knowledge distribution", method: "Descriptive + cut-points", result: "Mean 19.41/21 · 97.7% Good" },
-        { analysis: "Attitude distribution", method: "Descriptive + cut-points", result: "Mean 24.77/28 · 88.0% Very Positive" },
-        { analysis: "Knowledge × Attitude", method: "Chi-Square + Spearman ρ", result: "χ²=80.744, p<.001 · ρ=0.328" },
-        { analysis: "Knowledge × Practices", method: "Chi-Square × 7 tests", result: "All significant, p<.05" },
-        { analysis: "Coping → Knowledge", method: "Multiple Regression + ANOVA", result: "R²=0.044 · F(6,293)=2.270 · p=.037" }
-      ],
-      figures: [
-        { caption: "Fig1 — War exposure frequency distribution", src: "" },
-        { caption: "Fig2 — Knowledge score by coping strategy", src: "" }
-      ]
-    }
-  }
-  // Add more projects here following the same structure
-];
+<!-- Load project data from external file -->
+<script src="projects-data.js"></script>
 
+<script>
 // ============================================================
 // RENDER PROJECTS TABLE
 // ============================================================
 function renderProjects() {
   const tbody = document.getElementById('projects-tbody');
   const panels = document.getElementById('detail-panels');
-  
+
   tbody.innerHTML = '';
   panels.innerHTML = '';
-  
+
   // Render completed projects
   projects.forEach((proj, idx) => {
     const row = document.createElement('tr');
@@ -334,26 +296,26 @@ function renderProjects() {
       <td class="status-done">✦ done</td>
     `;
     tbody.appendChild(row);
-    
+
     // Render detail panel
     const d = proj.detail;
     const statsHtml = d.stats.map(s => `
       <div class="stat-box"><div class="val">${s.val}</div><div class="lbl">${s.lbl}</div></div>
     `).join('');
-    
+
     const findingsHtml = d.findings.map(f => `
       <tr><td>${f.analysis}</td><td>${f.method}</td><td>${f.result}</td></tr>
     `).join('');
-    
+
     const figuresHtml = d.figures.map(fig => `
       <div class="fig-box">
-        <div style="width:100%;height:200px;background:var(--card);border:1px dashed var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:.7rem;">
+        <div class="fig-placeholder">
           [Figure placeholder]<br/>${fig.caption}
         </div>
         <p class="fig-caption">${fig.caption}</p>
       </div>
     `).join('');
-    
+
     const panel = document.createElement('div');
     panel.className = 'detail-panel';
     panel.id = proj.id;
@@ -381,7 +343,7 @@ function renderProjects() {
     `;
     panels.appendChild(panel);
   });
-  
+
   // Render pending rows (fill to 45)
   const totalRows = 45;
   const currentCount = projects.length;
@@ -419,10 +381,4 @@ document.addEventListener('DOMContentLoaded', renderProjects);
 </script>
 
 </body>
-</html>'''
-
-with open('/mnt/agents/output/index.html', 'w') as f:
-    f.write(html)
-
-print("Saved to /mnt/agents/output/index.html")
-print(f"File size: {len(html)} characters")
+</html>
