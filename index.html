@@ -145,7 +145,6 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--mut
     <div class="badge-row fade-in">
       <span class="badge badge-blue">IBM SPSS Statistics</span>
       <span class="badge badge-green">Community Health</span>
-      <span class="badge badge-amber">45+ Projects</span>
       <span class="badge badge-cyan">Sudan</span>
     </div>
     <h1 class="fade-in d1">Mo<br/><span>Data Analyst</span></h1>
@@ -200,7 +199,7 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--mut
           </tr>
         </thead>
         <tbody id="projects-tbody">
-          </tbody>
+        </tbody>
       </table>
     </div>
 
@@ -261,7 +260,7 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--mut
 
 <script>
 // ============================================================
-// CONFIGURATION — PLACE YOUR DEPLOYED GOOGLE APPS SCRIPT URL HERE
+// CONFIGURATION — ACTIVE API ENVIRONMENT ARCHITECTURE
 // ============================================================
 const DRIVE_API_URL = "https://script.google.com/macros/s/AKfycbwkN5HDNhgGHgBtf0J-f8VJY21V2hhKsUtouDzqNk43zF90mQ4hFMVZEQ0da9Bs0U1pNA/exec";
 
@@ -275,6 +274,7 @@ function renderProjects() {
   tbody.innerHTML = '';
   panels.innerHTML = '';
 
+  // Process active records parsed from projects-data.js exclusively
   if (typeof projects !== 'undefined' && Array.isArray(projects)) {
     projects.forEach((proj, idx) => {
       const row = document.createElement('tr');
@@ -332,7 +332,6 @@ function renderProjects() {
       panels.appendChild(panel);
     });
   }
-
 }
 
 // ============================================================
@@ -346,13 +345,7 @@ async function loadDriveFiguresAuto(proj) {
     return;
   }
 
-  if (DRIVE_API_URL === "https://script.google.com/macros/s/AKfycbyJtO5xDSijtrufQyl2ztlXkSw_Cc5wL7smd8HLoITYy5OTj2rZ4qEONd_V0qSM0d6FNw/exec") {
-    container.innerHTML = `<div class="fig-placeholder">[Sandbox Mode]<br/>Provide your DRIVE_API_URL address to fetch cloud images.</div>`;
-    return;
-  }
-
   try {
-    // Call the Web App deployment script with your specified folder ID
     const response = await fetch(`${DRIVE_API_URL}?folderId=${proj.driveFolderId}`);
     
     if (!response.ok) {
@@ -370,7 +363,7 @@ async function loadDriveFiguresAuto(proj) {
       return;
     }
 
-    container.innerHTML = ''; // Clear loading notification
+    container.innerHTML = ''; 
     graphicAssets.forEach(img => {
       const cleanCaption = img.name
         .replace(/\.[^/.]+$/, "") 
@@ -386,7 +379,7 @@ async function loadDriveFiguresAuto(proj) {
       container.appendChild(figBox);
     });
 
-  } catch (err) {Data-Analysis-Project-
+  } catch (err) {
     console.warn(`Drive API Engine failed for ${proj.id}:`, err.message);
     container.innerHTML = `<div class="fig-placeholder">Cloud data fetching failed.<br/>Confirm your Google Folder sharing context is set to Public.</div>`;
   }
@@ -411,8 +404,10 @@ function toggleDetail(id) {
   }
 }
 
-// RUN CONTEXT
-document.addEventListener('DOMContentLoaded', renderProjects);
+// RUN CONTEXT LOGIC ON RUNTIME
+document.addEventListener('DOMContentLoaded', () => {
+  renderProjects();
+});
 </script>
 
 </body>
