@@ -32,8 +32,8 @@ const projects = [
         { analysis: "Coping → Knowledge", method: "Multiple Regression + ANOVA", result: "R²=0.044 · F(6,293)=2.270 · p=.037" }
       ],
       figures: [
-        { caption: "Fig1 — War exposure frequency distribution", src: "" },
-        { caption: "Fig2 — Knowledge score by coping strategy", src: "" }
+        { caption: "Fig1 — War exposure frequency distribution", src: "./01_war-psychology-KAP/figuers/fig1_war_exposure.png" },
+        { caption: "Fig2 — Knowledge score by coping strategy", src: "./01_war-psychology-KAP/figuers/fig2_knowledge_attitude.png" }
       ]
     }
   },
