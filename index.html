@@ -1,806 +1,384 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Mo · Data Analyst — Water Safety & Public Health</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
-      --bg: #ffffff;
-      --surface: #f9fafc;
-      --card: #ffffff;
-      --border-light: #eef2f6;
-      --border: #e4e9f0;
-      --text-primary: #121826;
-      --text-secondary: #4b5565;
-      --text-muted: #6c757d;
-      --accent: #3b71f0;
-      --accent-glow: rgba(59, 113, 240, 0.08);
-      --accent-soft: #eef3ff;
-      --green: #0f7b3a;
-      --amber: #c47c1e;
-      --cyan: #117f9a;
-      --shadow-sm: 0 8px 20px rgba(0,0,0,0.02), 0 2px 6px rgba(0,0,0,0.02);
-      --shadow-md: 0 12px 28px rgba(0,0,0,0.05), 0 0 0 1px rgba(0,0,0,0.01);
-      --radius-md: 20px;
-      --radius-sm: 14px;
-      --transition: all 0.2s ease;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text-primary);
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      line-height: 1.5;
-      scroll-behavior: smooth;
-    }
-
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 1.75rem;
-    }
-
-    /* nav */
-    .navbar {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(16px);
-      background: rgba(255,255,255,0.78);
-      border-bottom: 1px solid var(--border-light);
-      padding: 0.9rem 0;
-    }
-
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .logo {
-      font-weight: 700;
-      font-size: 1.25rem;
-      letter-spacing: -0.02em;
-      background: linear-gradient(135deg, #1e2a5e 0%, #2c3e8f 100%);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover {
-      color: var(--accent);
-    }
-
-    /* hero */
-    .hero {
-      padding: 4rem 0 3rem;
-    }
-
-    .badge-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1.8rem;
-    }
-
-    .badge {
-      font-size: 0.7rem;
-      font-weight: 500;
-      padding: 0.2rem 0.8rem;
-      border-radius: 30px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      letter-spacing: -0.2px;
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    h1 {
-      font-size: clamp(2.8rem, 8vw, 4.8rem);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 1.1;
-      margin-bottom: 1rem;
-    }
-
-    .gradient-text {
-      background: linear-gradient(125deg, #1e2f6e 0%, #2b4b9e 50%, #3b71f0 100%);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero-sub {
-      font-size: 1rem;
-      color: var(--text-secondary);
-      max-width: 600px;
-      margin-bottom: 2rem;
-    }
-
-    .pipeline {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.4rem;
-      margin-top: 1.8rem;
-    }
-
-    .pipe-step {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 0.3rem 0.9rem;
-      border-radius: 30px;
-      font-weight: 500;
-      color: var(--text-secondary);
-    }
-
-    section {
-      padding: 4rem 0;
-      border-top: 1px solid var(--border-light);
-    }
-
-    .section-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      font-weight: 500;
-      color: var(--accent);
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-    }
-
-    .section-title {
-      font-size: 1.8rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 2rem;
-      color: var(--text-primary);
-    }
-
-    /* stack */
-    .stack-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-    }
-
-    .stack-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 1.6rem;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .stack-card h4 {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-muted);
-      margin-bottom: 1rem;
-    }
-
-    .tag-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
-
-    .tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      padding: 0.2rem 0.7rem;
-      background: var(--surface);
-      border-radius: 30px;
-      color: var(--text-secondary);
-      border: 1px solid var(--border);
-    }
-
-    /* table modern */
-    .table-wrapper {
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      background: var(--card);
-      overflow-x: auto;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .project-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.85rem;
-    }
-
-    .project-table th {
-      text-align: left;
-      padding: 1rem 1rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-muted);
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .project-table td {
-      padding: 1rem 1rem;
-      border-bottom: 1px solid var(--border-light);
-      vertical-align: middle;
-    }
-
-    .project-table tbody tr:last-child td {
-      border-bottom: none;
-    }
-
-    .project-table tbody tr.real-row {
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .project-table tbody tr.real-row:hover {
-      background: var(--accent-soft);
-      transform: scale(1.002);
-    }
-
-    .proj-name {
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-
-    .domain-badge {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--cyan);
-      background: rgba(17, 127, 154, 0.08);
-      padding: 0.15rem 0.5rem;
-      border-radius: 20px;
-      display: inline-block;
-    }
-
-    .method-tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.6rem;
-      padding: 0.15rem 0.5rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      white-space: nowrap;
-    }
-
-    .status-done {
-      color: var(--green);
-      font-weight: 500;
-      font-size: 0.7rem;
-    }
-
-    .dim-row {
-      opacity: 0.45;
-    }
-
-    /* detail panel */
-    .detail-panel {
-      display: none;
-      margin-top: 1.5rem;
-      border-radius: var(--radius-md);
-      background: var(--card);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-md);
-      overflow: hidden;
-      transition: var(--transition);
-    }
-
-    .detail-panel.open {
-      display: block;
-      animation: fadeSlide 0.25s ease;
-    }
-
-    @keyframes fadeSlide {
-      from { opacity: 0; transform: translateY(-8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .detail-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.2rem 1.8rem;
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .detail-header h3 {
-      font-weight: 700;
-      font-size: 1.2rem;
-    }
-
-    .close-btn {
-      background: none;
-      border: 1px solid var(--border);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      padding: 0.3rem 0.9rem;
-      border-radius: 40px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .close-btn:hover {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: white;
-    }
-
-    .detail-body {
-      padding: 1.8rem;
-    }
-
-    .meta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-      background: var(--surface);
-      padding: 1rem 1.2rem;
-      border-radius: var(--radius-sm);
-    }
-
-    .meta-chip {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--text-secondary);
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .stat-card {
-      background: var(--surface);
-      border-radius: var(--radius-sm);
-      padding: 1rem;
-      text-align: center;
-      border: 1px solid var(--border-light);
-    }
-
-    .stat-val {
-      font-size: 1.5rem;
-      font-weight: 800;
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--accent);
-      line-height: 1.2;
-    }
-
-    .stat-label {
-      font-size: 0.62rem;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--text-muted);
-    }
-
-    .findings-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1.5rem 0;
-      font-size: 0.8rem;
-    }
-
-    .findings-table th {
-      text-align: left;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
-      padding: 0.6rem 0;
-      color: var(--text-muted);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .findings-table td {
-      padding: 0.8rem 0.2rem 0.8rem 0;
-      border-bottom: 1px solid var(--border-light);
-    }
-
-    .figures-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .fig-card {
-      background: var(--surface);
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
-      padding: 1rem;
-      text-align: center;
-    }
-
-    .fig-placeholder {
-      background: #f3f4f8;
-      border-radius: 12px;
-      height: 150px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      border: 1px dashed var(--border);
-    }
-
-    .approach-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .approach-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 1.5rem;
-    }
-
-    .approach-card .step-num {
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--accent);
-      opacity: 0.5;
-      margin-bottom: 0.5rem;
-    }
-
-    .tree-structure {
-      background: var(--surface);
-      border-radius: var(--radius-sm);
-      padding: 1.5rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      border: 1px solid var(--border);
-      line-height: 1.7;
-    }
-
-    footer {
-      border-top: 1px solid var(--border-light);
-      padding: 2rem 0;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-
-    .dot {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      background: var(--green);
-      border-radius: 50%;
-      margin-right: 6px;
-    }
-
-    @media (max-width: 700px) {
-      .container { padding: 0 1.2rem; }
-      .stack-grid { grid-template-columns: 1fr; }
-      .section-title { font-size: 1.5rem; }
-    }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mo — Data Analyst Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0a0e1a;--surface:#111627;--card:#161d30;--border:#1e2a42;--blue:#3b82f6;--cyan:#06b6d4;--green:#10b981;--amber:#f59e0b;--red:#ef4444;--text:#e2e8f0;--muted:#64748b;--dim:#334155;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;overflow-x:hidden;}
+body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;opacity:.2;pointer-events:none;z-index:0;}
+.wrap{max-width:1100px;margin:0 auto;padding:0 1.5rem;position:relative;z-index:1;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(10,14,26,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:.75rem 0;}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+.nav-logo{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--cyan);font-weight:500;text-decoration:none;}
+.nav-links{display:flex;gap:1.5rem;list-style:none;}
+.nav-links a{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--muted);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover{color:var(--cyan);}
+
+/* HERO */
+.hero{padding:5rem 0 3.5rem;position:relative;}
+.hero-glow{position:absolute;top:-80px;left:-150px;width:600px;height:450px;background:radial-gradient(ellipse,rgba(59,130,246,.1) 0%,transparent 70%);pointer-events:none;}
+.badge-row{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.75rem;}
+.badge{font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:500;padding:.22rem .65rem;border-radius:2px;border:1px solid;letter-spacing:.05em;text-transform:uppercase;}
+.badge-blue{color:var(--blue);border-color:rgba(59,130,246,.35);background:rgba(59,130,246,.08);}
+.badge-green{color:var(--green);border-color:rgba(16,185,129,.35);background:rgba(16,185,129,.08);}
+.badge-amber{color:var(--amber);border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.08);}
+.badge-cyan{color:var(--cyan);border-color:rgba(6,182,212,.35);background:rgba(6,182,212,.08);}
+h1{font-size:clamp(2.8rem,8vw,5rem);font-weight:800;line-height:1;letter-spacing:-.03em;margin-bottom:.5rem;}
+h1 span{background:linear-gradient(135deg,var(--blue) 0%,var(--cyan) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{font-family:'JetBrains Mono',monospace;font-size:.95rem;color:var(--muted);margin-bottom:2rem;}
+.pipeline{display:flex;align-items:center;flex-wrap:wrap;gap:.25rem;margin-top:2rem;}
+.pipe-step{font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:500;padding:.35rem .9rem;border:1px solid var(--border);background:var(--surface);color:var(--cyan);letter-spacing:.08em;text-transform:uppercase;}
+.pipe-arrow{font-family:'JetBrains Mono',monospace;color:var(--dim);font-size:.8rem;padding:0 .1rem;}
+
+/* SECTIONS */
+section{padding:3rem 0;border-top:1px solid var(--border);}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:500;color:var(--blue);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.6rem;}
+.section-title{font-size:1.5rem;font-weight:700;letter-spacing:-.02em;margin-bottom:1.5rem;}
+
+/* STACK */
+.stack-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);}
+.stack-cell{background:var(--card);padding:1.25rem;}
+.stack-cell h4{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.85rem;}
+.tag-list{display:flex;flex-wrap:wrap;gap:.35rem;}
+.tag{font-family:'JetBrains Mono',monospace;font-size:.68rem;padding:.18rem .55rem;background:var(--surface);border:1px solid var(--border);color:var(--text);border-radius:2px;}
+
+/* PROJECTS TABLE */
+.table-wrap{overflow-x:auto;border:1px solid var(--border);}
+table{width:100%;border-collapse:collapse;font-size:.85rem;}
+thead tr{background:var(--surface);border-bottom:1px solid var(--border);}
+thead th{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:500;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;padding:.8rem 1rem;text-align:left;white-space:nowrap;}
+tbody tr{border-bottom:1px solid var(--border);transition:background .15s;cursor:pointer;}
+tbody tr:hover{background:var(--surface);}
+tbody tr:last-child{border-bottom:none;}
+tbody td{padding:.8rem 1rem;vertical-align:middle;}
+.proj-num{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted);}
+.proj-name{color:var(--text);font-weight:600;}
+.proj-name.active{color:var(--cyan);}
+.proj-domain{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--cyan);white-space:nowrap;}
+.proj-n{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--amber);text-align:center;}
+.method-list{display:flex;flex-wrap:wrap;gap:.25rem;}
+.mtag{font-family:'JetBrains Mono',monospace;font-size:.62rem;padding:.12rem .4rem;background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);color:var(--blue);border-radius:2px;white-space:nowrap;}
+.hl-cell{font-size:.78rem;color:var(--muted);max-width:240px;}
+.status-done{color:var(--green);font-family:'JetBrains Mono',monospace;font-size:.7rem;}
+.status-pending{color:var(--dim);font-family:'JetBrains Mono',monospace;font-size:.7rem;}
+.dim-row td{opacity:.35;}
+
+/* PROJECT DETAIL PANEL */
+.detail-panel{display:none;border:1px solid var(--border);background:var(--card);margin-top:1rem;overflow:hidden;}
+.detail-panel.open{display:block;}
+.detail-header{padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.detail-header h3{font-size:1.1rem;font-weight:700;color:var(--text);}
+.close-btn{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--muted);background:none;border:1px solid var(--border);padding:.3rem .7rem;cursor:pointer;color:var(--text);}
+.close-btn:hover{border-color:var(--cyan);color:var(--cyan);}
+.detail-body{padding:1.5rem;}
+.detail-meta{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.5rem;}
+.detail-meta span{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted);}
+.detail-meta span b{color:var(--text);}
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:1.5rem;}
+.stat-box{background:var(--surface);padding:1rem 1.25rem;}
+.stat-box .val{font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:700;color:var(--cyan);margin-bottom:.25rem;}
+.stat-box .lbl{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;}
+.findings-table{width:100%;border-collapse:collapse;font-size:.8rem;margin-bottom:1.5rem;}
+.findings-table th{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;padding:.6rem .75rem;text-align:left;border-bottom:1px solid var(--border);}
+.findings-table td{padding:.65rem .75rem;border-bottom:1px solid rgba(30,42,66,.5);color:var(--text);}
+.findings-table td:last-child{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--green);}
+.figures-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);}
+.fig-box{background:var(--surface);padding:1rem;}
+.fig-box img{width:100%;height:auto;display:block;}
+.fig-placeholder{width:100%;height:200px;background:var(--card);border:1px dashed var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:.7rem;text-align:center;}
+.fig-caption{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--muted);margin-top:.5rem;letter-spacing:.04em;}
+
+/* METHOD CARDS */
+.method-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);}
+.method-card{background:var(--card);padding:1.25rem;}
+.method-card .icon{font-size:1.1rem;margin-bottom:.6rem;}
+.method-card h4{font-size:.88rem;font-weight:700;margin-bottom:.4rem;}
+.method-card p{font-size:.78rem;color:var(--muted);line-height:1.6;}
+
+/* TREE */
+.tree{font-family:'JetBrains Mono',monospace;font-size:.78rem;line-height:2;color:var(--muted);background:var(--card);border:1px solid var(--border);padding:1.25rem 1.75rem;}
+.tree .dir{color:var(--cyan);}.tree .file{color:var(--text);}.tree .note{color:var(--dim);}.tree .hl{color:var(--blue);}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:2rem 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+footer p{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--muted);}
+.dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);margin-right:.4rem;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+
+/* FADE IN */
+.fade-in{opacity:0;transform:translateY(16px);animation:fadeUp .6s ease forwards;}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
+.d1{animation-delay:.1s;}.d2{animation-delay:.2s;}.d3{animation-delay:.3s;}.d4{animation-delay:.4s;}
+
+@media(max-width:640px){
+  .stack-grid{grid-template-columns:1fr;}
+  h1{font-size:2.5rem;}
+  .detail-meta{gap:.75rem;}
+  .figures-grid{grid-template-columns:1fr;}
+}
+</style>
+<base target="_blank">
 </head>
 <body>
 
-<nav class="navbar">
-  <div class="container nav-inner">
-    <a href="#" class="logo">Mo · data analyst</a>
+<!-- NAV -->
+<nav>
+  <div class="wrap nav-inner">
+    <a class="nav-logo" href="#">Mo · Data Analyst</a>
     <ul class="nav-links">
-      <li><a href="#stack">stack</a></li>
-      <li><a href="#projects">projects</a></li>
-      <li><a href="#approach">approach</a></li>
-      <li><a href="#structure">repo</a></li>
+      <li><a href="#stack">Stack</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#structure">Structure</a></li>
     </ul>
   </div>
 </nav>
 
-<main>
-  <div class="container">
-    <div class="hero">
-      <div class="badge-group">
-        <span class="badge">IBM SPSS</span>
-        <span class="badge">R Stats</span>
-        <span class="badge">Environmental Health</span>
-        <span class="badge">Sudan Field Data</span>
-        <span class="badge">Logistic Regression</span>
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-glow"></div>
+    <div class="badge-row fade-in">
+      <span class="badge badge-blue">IBM SPSS Statistics</span>
+      <span class="badge badge-green">Community Health</span>
+      <span class="badge badge-amber">45+ Projects</span>
+      <span class="badge badge-cyan">Sudan</span>
+    </div>
+    <h1 class="fade-in d1">Mo<br/><span>Data Analyst</span></h1>
+    <p class="hero-sub fade-in d2">Turning raw survey data into evidence that matters.</p>
+    <div class="pipeline fade-in d3">
+      <span class="pipe-step">Raw Data</span><span class="pipe-arrow">──►</span>
+      <span class="pipe-step">Clean</span><span class="pipe-arrow">──►</span>
+      <span class="pipe-step">Analyse</span><span class="pipe-arrow">──►</span>
+      <span class="pipe-step">Interpret</span><span class="pipe-arrow">──►</span>
+      <span class="pipe-step">Insight</span>
+    </div>
+  </div>
+
+  <!-- STACK -->
+  <section id="stack" class="fade-in d4">
+    <p class="section-label">// 01 — Technical Stack</p>
+    <h2 class="section-title">Tools &amp; Methods</h2>
+    <div class="stack-grid">
+      <div class="stack-cell">
+        <h4>Statistical Methods</h4>
+        <div class="tag-list">
+          <span class="tag">Descriptive Statistics</span><span class="tag">Chi-Square χ²</span>
+          <span class="tag">Spearman ρ</span><span class="tag">Pearson r</span>
+          <span class="tag">Linear Regression</span><span class="tag">One-Way ANOVA</span>
+          <span class="tag">Cross-tabulation</span><span class="tag">Multiple-Response</span>
+          <span class="tag">Score Classification</span><span class="tag">Reliability Analysis</span>
+        </div>
       </div>
-      <h1>Water, health &<br><span class="gradient-text">evidence-based insights</span></h1>
-      <p class="hero-sub">Survey analytics · biostatistics · community-driven research</p>
-      <div class="pipeline">
-        <span class="pipe-step">Raw survey</span><span>→</span>
-        <span class="pipe-step">Cleaning & coding</span><span>→</span>
-        <span class="pipe-step">SPSS/R modelling</span><span>→</span>
-        <span class="pipe-step">Policy narratives</span>
+      <div class="stack-cell">
+        <h4>Data Characteristics</h4>
+        <div class="tag-list">
+          <span class="tag">Ordinal &amp; Nominal</span><span class="tag">Likert-scale</span>
+          <span class="tag">Multiple-response</span><span class="tag">Continuous Outcomes</span>
+          <span class="tag">Cross-sectional</span><span class="tag">KAP Surveys</span>
+          <span class="tag">Community Datasets</span><span class="tag">Epidemiological</span>
+          <span class="tag">Field Research</span><span class="tag">Health Outcomes</span>
+        </div>
       </div>
     </div>
+  </section>
 
-    <section id="stack">
-      <p class="section-label">// analytical core</p>
-      <h2 class="section-title">Methods & toolchain</h2>
-      <div class="stack-grid">
-        <div class="stack-card">
-          <h4>Statistical methods</h4>
-          <div class="tag-list">
-            <span class="tag">Chi-square χ²</span><span class="tag">Logistic regression</span><span class="tag">Binary logit</span>
-            <span class="tag">Spearman ρ</span><span class="tag">Pearson r</span><span class="tag">ANOVA</span>
-            <span class="tag">Cross-tabulation</span><span class="tag">Multiple response sets</span>
-            <span class="tag">Nagelkerke R²</span><span class="tag">Odds ratios</span>
-          </div>
-        </div>
-        <div class="stack-card">
-          <h4>Data landscapes</h4>
-          <div class="tag-list">
-            <span class="tag">KAP surveys</span><span class="tag">Likert scales</span><span class="tag">Environmental health</span>
-            <span class="tag">Water quality indices</span><span class="tag">Ordinal/Nominal</span>
-            <span class="tag">Cross-sectional design</span><span class="tag">Field research</span>
-          </div>
-        </div>
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="section-label">// 02 — Projects</p>
+    <h2 class="section-title">Analysis Portfolio</h2>
+    <p style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted);margin-bottom:1rem;">Click any completed project row to expand the full analysis.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th><th>Project</th><th>Domain</th><th>n</th>
+            <th>Key Methods</th><th>Highlight</th><th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="projects-tbody">
+          <!-- Projects rendered dynamically from projects-data.js -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- DETAIL PANELS CONTAINER -->
+    <div id="detail-panels"></div>
+  </section>
+
+  <!-- APPROACH -->
+  <section id="approach">
+    <p class="section-label">// 03 — Analytical Approach</p>
+    <h2 class="section-title">How Each Study is Conducted</h2>
+    <div class="method-grid">
+      <div class="method-card">
+        <div class="icon">01</div>
+        <h4>Data Cleaning</h4>
+        <p>Missing-value checks, outlier detection, reverse-coding, and consistency validation before any analysis begins.</p>
       </div>
-    </section>
-
-    <section id="projects">
-      <p class="section-label">// portfolio deep-dive</p>
-      <h2 class="section-title">Featured projects</h2>
-      <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:1rem;">⬤ click any completed row → full analysis (SPSS/R output, odds ratios, detailed findings)</p>
-      <div class="table-wrapper">
-        <table class="project-table" id="project-table">
-          <thead>
-            <tr><th>#</th><th>Project</th><th>Domain</th><th>n</th><th>Key methods</th><th>Key highlight</th><th>Status</th></tr>
-          </thead>
-          <tbody id="projects-tbody"></tbody>
-        </table>
+      <div class="method-card">
+        <div class="icon">02</div>
+        <h4>Descriptive Profiling</h4>
+        <p>Frequencies, percentages, means and standard deviations to characterise the sample and key variables.</p>
       </div>
-      <div id="detail-panels-container"></div>
-    </section>
-
-    <section id="approach">
-      <p class="section-label">// workflow signature</p>
-      <h2 class="section-title">From raw data to decision</h2>
-      <div class="approach-grid">
-        <div class="approach-card"><div class="step-num">01</div><h4>Data integrity</h4><p>Missing diagnosis, outlier detection, reverse coding, recoding of multiple-response sets.</p></div>
-        <div class="approach-card"><div class="step-num">02</div><h4>Descriptive mapping</h4><p>Frequencies, means, crosstabs, and distribution charts to profile the sample.</p></div>
-        <div class="approach-card"><div class="step-num">03</div><h4>Inferential engines</h4><p>χ², t-tests, logistic/linear regression, ANOVA, correlation matrices.</p></div>
-        <div class="approach-card"><div class="step-num">04</div><h4>Impact reporting</h4><p>Odds ratios, model fit statistics, and actionable narratives.</p></div>
+      <div class="method-card">
+        <div class="icon">03</div>
+        <h4>Inferential Testing</h4>
+        <p>Chi-square, correlation, regression and ANOVA to test hypotheses and quantify associations.</p>
       </div>
-    </section>
-
-    <section id="structure">
-      <p class="section-label">// reproducibility</p>
-      <h2 class="section-title">Project anatomy</h2>
-      <div class="tree-structure">
-        <span style="color:#1e466e;">📁 water-safety-omdurman/</span><br>
-        &nbsp;&nbsp;├── <span style="color:#117f9a;">data/</span> <span style="color:#7c7f8c;">→ raw_household.sav, cleaned_water.sav</span><br>
-        &nbsp;&nbsp;├── <span style="color:#117f9a;">syntax/</span> <span style="color:#7c7f8c;">→ 01_frequencies.sps, 02_chisquare.sps, 03_logistic_regression.sps</span><br>
-        &nbsp;&nbsp;├── <span style="color:#117f9a;">output/</span> <span style="color:#7c7f8c;">→ tables/, model_summaries/</span><br>
-        &nbsp;&nbsp;└── <span style="color:#117f9a;">report/</span> <span style="color:#7c7f8c;">→ figures, findings.md</span><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#3b71f0;">├── logistic_OR_plot.png</span><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#3b71f0;">└── water_source_chart.png</span>
+      <div class="method-card">
+        <div class="icon">04</div>
+        <h4>Visualisation</h4>
+        <p>Bar charts, cross-tabs, and regression plots exported from SPSS for clear reporting.</p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <footer>
-      <p><span class="dot"></span> available for analysis consulting · Sudan & remote</p>
-      <p>IBM SPSS · R · public health evidence</p>
-    </footer>
-  </div>
-</main>
+  <!-- STRUCTURE -->
+  <section id="structure">
+    <p class="section-label">// 04 — Project Structure</p>
+    <h2 class="section-title">Repository Layout</h2>
+    <div class="tree">
+      <span class="dir">📁 project-name/</span><br/>
+      &nbsp;&nbsp;<span class="dir">├── data/</span> <span class="note">— raw + cleaned .sav files</span><br/>
+      &nbsp;&nbsp;<span class="dir">├── syntax/</span> <span class="note">— .sps analysis scripts</span><br/>
+      &nbsp;&nbsp;<span class="dir">├── output/</span> <span class="note">— tables, charts, model summaries</span><br/>
+      &nbsp;&nbsp;<span class="dir">└── report/</span> <span class="note">— findings write-up</span><br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── <span class="hl">01_descriptives.sps</span></span><br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── <span class="hl">02_chisquare.sps</span></span><br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">├── <span class="hl">03_regression.sps</span></span><br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file">└── <span class="hl">figures/</span></span> <span class="note">— PNG exports from SPSS</span>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p><span class="dot"></span>Available for analysis commissions</p>
+    <p>Omdurman, Sudan · IBM SPSS Statistics</p>
+  </footer>
+
+</div>
+
+<!-- Load project data from external file -->
+<script src="projects-data.js"></script>
 
 <script>
-  // ------------------------------------------------------------------
-  // Data is loaded from external projects-data.js as requested.
-  // The script expects a global variable `portfolioProjects` (array)
-  // If not found, fallback to default minimal to avoid breaking.
-  // ------------------------------------------------------------------
-  let projectsArray = [];
+// ============================================================
+// RENDER PROJECTS TABLE
+// ============================================================
+function renderProjects() {
+  const tbody = document.getElementById('projects-tbody');
+  const panels = document.getElementById('detail-panels');
 
-  // Wait for external data (projects-data.js sets window.portfolioProjects)
-  function loadExternalDataAndRender() {
-    if (typeof window.portfolioProjects !== 'undefined' && Array.isArray(window.portfolioProjects)) {
-      projectsArray = window.portfolioProjects;
-    } else {
-      // fallback with provided example data (Water Safety + additional demo project)
-      console.warn("projects-data.js not detected, using inline demo data (includes your Omdurman water study)");
-      projectsArray = [
-        {
-          id: "p02",
-          name: "Water Safety Analysis — Omdurman",
-          domain: "Environmental Health",
-          n: 80,
-          methods: ["Descriptive Stats", "Cross-tabs", "Logistic Regression", "Chi-Square"],
-          highlight: "91.3% believe water causes disease · 51.2% rely on wells · OR=19.1 for treatment-seeking",
-          status: "done",
-          detail: {
-            sample: "80 households",
-            location: "Omdurman, Sudan",
-            design: "Cross-sectional household survey",
-            tool: "R Studio",
-            topic: "Water source, storage, sanitation practices & disease perception",
-            stats: [
-              { val: "51.2%", lbl: "Wells Primary" },
-              { val: "26.2%", lbl: "Tanker Trucks" },
-              { val: "81.2%", lbl: "Store Water at Home" },
-              { val: "91.2%", lbl: "Tanks Covered Tight" },
-              { val: "62.5%", lbl: "Clean Monthly" },
-              { val: "91.2%", lbl: "Believe Water Causes Disease" },
-              { val: "37.5%", lbl: "Sought Treatment" },
-              { val: "OR=19.1", lbl: "Belief → Treatment Seeking" }
-            ],
-            findings: [
-              { analysis: "Primary water source distribution", method: "Descriptive frequencies", result: "Wells 51.2% · Tankers 26.2% · Public network 13.8% · Bottled 3.8% · Vendors 2.5% · Station 1.2%" },
-              { analysis: "Regular water access", method: "Descriptive frequencies", result: "71.2% report irregular supply · 28.8% regular" },
-              { analysis: "Water storage practices", method: "Descriptive frequencies", result: "81.2% store at home · 57.5% use barrels · 28.8% overhead tanks · 7.5% ground tanks · 6.2% jerrycans" },
-              { analysis: "Tank cleaning frequency", method: "Descriptive frequencies", result: "62.5% monthly · 23.8% every 3 months · 6.2% every 6 months · 7.5% never" },
-              { analysis: "Cleaning method", method: "Descriptive frequencies", result: "50% water+soap · 40% water only · 3.8% chlorine · 6.2% don't know" },
-              { analysis: "Boiling before drinking", method: "Descriptive frequencies", result: "76.2% never · 21.2% sometimes · 2.5% always" },
-              { analysis: "Home filter use", method: "Descriptive frequencies", result: "82.5% no filter · 17.5% use filter" },
-              { analysis: "Sensory problems", method: "Descriptive frequencies", result: "42.5% report problems · 35% color change · 28.8% bad taste" },
-              { analysis: "Most affected age group", method: "Descriptive frequencies", result: "66.2% children <5 years · 18.8% children 5-15" },
-              { analysis: "Tank type × Cleaning frequency", method: "Chi-Square cross-tab", result: "χ² significant (p=0.001) — barrel users clean monthly most often" },
-              { analysis: "Belief → Treatment-seeking", method: "Binary Logistic Regression", result: "OR=19.135 (p=0.020) — belief that water causes disease is strongest predictor" },
-              { analysis: "Model fit", method: "Logistic Regression diagnostics", result: "Nagelkerke R²=0.414 · Cox & Snell R²=0.303 · Overall correct classification 76.3%" }
-            ],
-            figures: [
-              { caption: "Fig1 — Primary water source distribution", src: "" },
-              { caption: "Fig2 — Water storage container types", src: "" },
-              { caption: "Fig3 — Tank cleaning frequency by container type", src: "" },
-              { caption: "Fig4 — Logistic regression odds ratios (OR=19.1 belief effect)", src: "" }
-            ]
-          }
-        },
-        {
-          id: "p01",
-          name: "Maternal health access barriers",
-          domain: "Public Health",
-          n: 482,
-          methods: ["Chi-square", "Logistic reg", "Descriptives"],
-          highlight: "Distance to clinic (OR=2.34, p<.01)",
-          status: "done",
-          detail: {
-            sample: "482 women 15-49", location: "Khartoum", design: "cluster survey", tool: "SPSS",
-            topic: "Skilled birth attendance",
-            stats: [{val:"482",lbl:"Sample"},{val:"OR 2.34",lbl:"Barrier"},{val:"p<.01",lbl:"Significance"}],
-            findings: [{analysis:"Education & SBA",method:"χ²",result:"p<.001"}],
-            figures: [{caption:"Access barriers map"}]
-          }
-        }
-      ];
-    }
-    renderFullPortfolio(projectsArray);
-  }
+  tbody.innerHTML = '';
+  panels.innerHTML = '';
 
-  function renderFullPortfolio(projects) {
-    const tbody = document.getElementById('projects-tbody');
-    const panelsContainer = document.getElementById('detail-panels-container');
-    if (!tbody || !panelsContainer) return;
-    tbody.innerHTML = '';
-    panelsContainer.innerHTML = '';
+  // Render completed projects
+  projects.forEach((proj, idx) => {
+    const row = document.createElement('tr');
+    row.onclick = () => toggleDetail(proj.id);
+    row.id = `row-${proj.id}`;
+    row.innerHTML = `
+      <td class="proj-num">${String(idx + 1).padStart(2, '0')}</td>
+      <td><span class="proj-name active" id="name-${proj.id}">${proj.name}</span></td>
+      <td class="proj-domain">${proj.domain}</td>
+      <td class="proj-n">${proj.n}</td>
+      <td><div class="method-list">${proj.methods.map(m => `<span class="mtag">${m}</span>`).join('')}</div></td>
+      <td class="hl-cell">${proj.highlight}</td>
+      <td class="status-done">✦ done</td>
+    `;
+    tbody.appendChild(row);
 
-    const realProjects = projects.filter(p => p.status !== "pending");
-    const TOTAL_VISIBLE = 45;
-    
-    realProjects.forEach((proj, idx) => {
-      const row = document.createElement('tr');
-      row.className = 'real-row';
-      row.setAttribute('data-id', proj.id);
-      row.onclick = () => toggleDetail(proj.id);
-      const methodTags = (proj.methods || []).map(m => `<span class="method-tag">${escapeHtml(m)}</span>`).join(' ');
-      row.innerHTML = `
-        <td style="font-family: monospace; color: var(--text-muted);">${String(idx+1).padStart(2,'0')}</td>
-        <td><span class="proj-name">${escapeHtml(proj.name)}</span></td>
-        <td><span class="domain-badge">${escapeHtml(proj.domain)}</span></td>
-        <td style="font-weight:500;">${proj.n}</td>
-        <td><div style="display: flex; flex-wrap: wrap; gap: 5px;">${methodTags}</div></td>
-        <td style="max-width: 240px; font-size:0.75rem; color: var(--text-secondary);">${escapeHtml(proj.highlight)}</td>
-        <td class="status-done">✓ completed</td>
-      `;
-      tbody.appendChild(row);
+    // Render detail panel
+    const d = proj.detail;
+    const statsHtml = d.stats.map(s => `
+      <div class="stat-box"><div class="val">${s.val}</div><div class="lbl">${s.lbl}</div></div>
+    `).join('');
 
-      // detail panel
-      const d = proj.detail;
-      const statsHtml = (d.stats || []).map(s => `
-        <div class="stat-card"><div class="stat-val">${escapeHtml(s.val)}</div><div class="stat-label">${escapeHtml(s.lbl)}</div></div>
-      `).join('');
-      const findingsHtml = (d.findings || []).map(f => `
-        <tr><td style="font-weight:500;">${escapeHtml(f.analysis)}</td><td>${escapeHtml(f.method)}</td><td style="font-family: monospace;">${escapeHtml(f.result)}</td></tr>
-      `).join('');
-      const figuresHtml = (d.figures || []).map(fig => `
-        <div class="fig-card"><div class="fig-placeholder">📊 [SPSS/R output]<br>${escapeHtml(fig.caption)}</div><div class="stat-label" style="margin-top:0.5rem;">${escapeHtml(fig.caption)}</div></div>
-      `).join('');
+    const findingsHtml = d.findings.map(f => `
+      <tr><td>${f.analysis}</td><td>${f.method}</td><td>${f.result}</td></tr>
+    `).join('');
 
-      const panel = document.createElement('div');
-      panel.id = proj.id;
-      panel.className = 'detail-panel';
-      panel.innerHTML = `
-        <div class="detail-header"><h3>${escapeHtml(proj.name)}</h3><button class="close-btn" onclick="event.stopPropagation(); window.toggleDetail('${proj.id}')">✕ Close</button></div>
-        <div class="detail-body">
-          <div class="meta-row">
-            <span class="meta-chip"><strong>Sample:</strong> ${escapeHtml(d.sample || '—')}</span>
-            <span class="meta-chip"><strong>Location:</strong> ${escapeHtml(d.location || '—')}</span>
-            <span class="meta-chip"><strong>Design:</strong> ${escapeHtml(d.design || '—')}</span>
-            <span class="meta-chip"><strong>Tool:</strong> ${escapeHtml(d.tool || 'SPSS')}</span>
-            <span class="meta-chip"><strong>Topic:</strong> ${escapeHtml(d.topic || '—')}</span>
-          </div>
-          <div class="stats-grid">${statsHtml || '<div class="stat-card">—</div>'}</div>
-          <table class="findings-table"><thead><tr><th>Analysis</th><th>Method</th><th>Result</th></tr></thead><tbody>${findingsHtml || '<tr><td colspan="3">detailed results not available</td></tr>'}</tbody></table>
-          <p class="section-label" style="margin-top:0.5rem;">figures & visual evidence</p>
-          <div class="figures-grid">${figuresHtml || '<div class="fig-card"><div class="fig-placeholder">📈 figure space</div></div>'}</div>
+    const figuresHtml = d.figures.map(fig => `
+      <div class="fig-box">
+        <div class="fig-placeholder">
+          [Figure placeholder]<br/>${fig.caption}
         </div>
-      `;
-      panelsContainer.appendChild(panel);
-    });
+        <p class="fig-caption">${fig.caption}</p>
+      </div>
+    `).join('');
 
-    // filler rows until 45
-    const filledCount = realProjects.length;
-    for (let i = filledCount + 1; i <= TOTAL_VISIBLE; i++) {
-      const placeholder = document.createElement('tr');
-      placeholder.className = 'dim-row';
-      placeholder.style.cursor = 'default';
-      placeholder.innerHTML = `
-        <td style="font-family: monospace;">${String(i).padStart(2,'0')}</td>
-        <td><span style="color:var(--text-muted);">upcoming study</span></td>
-        <td>—</td><td>—</td><td>—</td><td>—</td>
-        <td class="status-pending" style="color:#9095a4;">in field</td>
-      `;
-      tbody.appendChild(placeholder);
-    }
-  }
-
-  function toggleDetail(id) {
-    const panel = document.getElementById(id);
-    if (!panel) return;
-    const allPanels = document.querySelectorAll('.detail-panel');
-    allPanels.forEach(p => { if (p.id !== id) p.classList.remove('open'); });
-    panel.classList.toggle('open');
-    if (panel.classList.contains('open')) {
-      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }
-  window.toggleDetail = toggleDetail;
-
-  function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    loadExternalDataAndRender();
+    const panel = document.createElement('div');
+    panel.className = 'detail-panel';
+    panel.id = proj.id;
+    panel.innerHTML = `
+      <div class="detail-header">
+        <h3>${String(idx + 1).padStart(2, '0')} — ${proj.name}</h3>
+        <button class="close-btn" onclick="toggleDetail('${proj.id}')">✕ Close</button>
+      </div>
+      <div class="detail-body">
+        <div class="detail-meta">
+          <span><b>Sample:</b> ${d.sample}</span>
+          <span><b>Location:</b> ${d.location}</span>
+          <span><b>Design:</b> ${d.design}</span>
+          <span><b>Tool:</b> ${d.tool}</span>
+          <span><b>Topic:</b> ${d.topic}</span>
+        </div>
+        <div class="stats-row">${statsHtml}</div>
+        <table class="findings-table">
+          <thead><tr><th>Analysis</th><th>Method</th><th>Result</th></tr></thead>
+          <tbody>${findingsHtml}</tbody>
+        </table>
+        <p class="section-label" style="margin-bottom:.85rem;">Figures</p>
+        <div class="figures-grid">${figuresHtml}</div>
+      </div>
+    `;
+    panels.appendChild(panel);
   });
+
+  // Render pending rows (fill to 45)
+  const totalRows = 45;
+  const currentCount = projects.length;
+  for (let i = currentCount + 1; i <= totalRows; i++) {
+    const row = document.createElement('tr');
+    row.className = 'dim-row';
+    row.innerHTML = `
+      <td class="proj-num">${String(i).padStart(2, '0')}</td>
+      <td><span style="color:var(--dim)">Coming soon</span></td>
+      <td class="proj-domain">—</td><td class="proj-n">—</td>
+      <td>—</td><td class="hl-cell">—</td>
+      <td class="status-pending">· pending</td>
+    `;
+    tbody.appendChild(row);
+  }
+}
+
+// ============================================================
+// TOGGLE DETAIL PANEL
+// ============================================================
+function toggleDetail(id) {
+  const panel = document.getElementById(id);
+  const allPanels = document.querySelectorAll('.detail-panel');
+  allPanels.forEach(p => { if (p.id !== id) p.classList.remove('open'); });
+  panel.classList.toggle('open');
+  if (panel.classList.contains('open')) {
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+// ============================================================
+// INIT
+// ============================================================
+document.addEventListener('DOMContentLoaded', renderProjects);
 </script>
 
-<!-- external data file should define window.portfolioProjects = [ ... ] -->
-<script src="projects-data.js" onerror="console.warn('projects-data.js missing, using fallback')"></script>
 </body>
 </html>
