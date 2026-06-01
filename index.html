@@ -12,16 +12,12 @@
 body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;overflow-x:hidden;}
 body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;opacity:.18;pointer-events:none;z-index:0;}
 .wrap{max-width:1100px;margin:0 auto;padding:0 1.5rem;position:relative;z-index:1;}
-
-/* NAV */
 nav{position:sticky;top:0;z-index:100;background:rgba(10,14,26,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:.7rem 0;}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;}
 .nav-logo{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--cyan);text-decoration:none;}
 .nav-links{display:flex;gap:1.5rem;list-style:none;}
 .nav-links a{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--muted);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .2s;}
 .nav-links a:hover{color:var(--cyan);}
-
-/* HERO */
 .hero{padding:5rem 0 3.5rem;position:relative;}
 .hero-glow{position:absolute;top:-80px;left:-150px;width:600px;height:450px;background:radial-gradient(ellipse,rgba(59,130,246,.1) 0%,transparent 70%);pointer-events:none;}
 .badge-row{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.75rem;}
@@ -36,33 +32,27 @@ h1 span{background:linear-gradient(135deg,var(--blue),var(--cyan));-webkit-backg
 .pipeline{display:flex;align-items:center;flex-wrap:wrap;gap:.25rem;margin-top:1.75rem;}
 .pipe-step{font-family:'JetBrains Mono',monospace;font-size:.68rem;padding:.32rem .85rem;border:1px solid var(--border);background:var(--surface);color:var(--cyan);letter-spacing:.08em;text-transform:uppercase;}
 .pipe-arrow{font-family:'JetBrains Mono',monospace;color:var(--dim);font-size:.8rem;}
-
-/* SECTIONS */
 section{padding:2.75rem 0;border-top:1px solid var(--border);}
 .section-label{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--blue);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.5rem;}
 .section-title{font-size:1.45rem;font-weight:700;letter-spacing:-.02em;margin-bottom:1.4rem;}
-
-/* STACK */
 .stack-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);}
 .stack-cell{background:var(--card);padding:1.2rem;}
 .stack-cell h4{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.8rem;}
 .tag-list{display:flex;flex-wrap:wrap;gap:.32rem;}
 .tag{font-family:'JetBrains Mono',monospace;font-size:.67rem;padding:.17rem .52rem;background:var(--surface);border:1px solid var(--border);color:var(--text);border-radius:2px;}
 
-/* ── IMPORT PANEL ── */
-.import-panel{border:1px solid var(--border);background:var(--card);padding:1.25rem 1.5rem;margin-bottom:1.25rem;}
-.import-title{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--cyan);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem;}
-.import-row{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;}
-.import-btn{font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.4rem 1rem;border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;transition:all .2s;white-space:nowrap;}
-.import-btn:hover{border-color:var(--cyan);color:var(--cyan);}
-.import-btn.primary{border-color:var(--blue);color:var(--blue);background:rgba(59,130,246,.08);}
-.import-btn.primary:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(6,182,212,.08);}
-.import-status{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--muted);}
-.import-status.ok{color:var(--green);}
-.import-status.err{color:var(--red);}
-#file-input{display:none;}
-.template-note{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--dim);margin-top:.6rem;}
-.template-note b{color:var(--muted);}
+/* ── DATA STATUS BAR ── */
+.data-bar{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;padding:.6rem 1rem;background:var(--card);border:1px solid var(--border);flex-wrap:wrap;}
+.data-bar-label{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;}
+.data-bar-status{font-family:'JetBrains Mono',monospace;font-size:.7rem;}
+.data-bar-status.loading{color:var(--amber);}
+.data-bar-status.ok{color:var(--green);}
+.data-bar-status.err{color:var(--red);}
+.data-bar-file{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--cyan);}
+.data-bar-dot{width:6px;height:6px;border-radius:50%;background:var(--amber);animation:pulse 1.5s infinite;flex-shrink:0;}
+.data-bar-dot.ok{background:var(--green);animation:none;}
+.data-bar-dot.err{background:var(--red);animation:none;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
 
 /* FILTER BAR */
 .filter-bar{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem;align-items:center;}
@@ -71,8 +61,6 @@ section{padding:2.75rem 0;border-top:1px solid var(--border);}
 .search-box{font-family:'JetBrains Mono',monospace;font-size:.72rem;padding:.32rem .8rem;border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:2px;outline:none;min-width:180px;}
 .search-box:focus{border-color:var(--cyan);}
 .search-box::placeholder{color:var(--dim);}
-
-/* TABLE */
 .table-wrap{overflow-x:auto;border:1px solid var(--border);}
 table{width:100%;border-collapse:collapse;font-size:.84rem;}
 thead tr{background:var(--surface);border-bottom:1px solid var(--border);}
@@ -83,7 +71,7 @@ tbody tr.clickable:hover{background:var(--surface);}
 tbody td{padding:.75rem 1rem;vertical-align:middle;}
 .proj-num{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--muted);}
 .proj-name{color:var(--text);font-weight:600;}
-.proj-name.clickable-name{color:var(--cyan);}
+.proj-name.has-detail{color:var(--cyan);}
 .proj-domain{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--cyan);}
 .proj-tool{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--amber);}
 .proj-n{font-family:'JetBrains Mono',monospace;font-size:.76rem;color:var(--amber);text-align:center;}
@@ -94,8 +82,6 @@ tbody td{padding:.75rem 1rem;vertical-align:middle;}
 .status-wip{color:var(--amber);font-family:'JetBrains Mono',monospace;font-size:.68rem;}
 .status-pending{color:var(--dim);font-family:'JetBrains Mono',monospace;font-size:.68rem;}
 .dim-row td{opacity:.32;}
-
-/* DETAIL PANEL */
 .detail-panel{display:none;border:1px solid var(--cyan);background:var(--card);margin-top:.5rem;overflow:hidden;animation:slideDown .22s ease;}
 @keyframes slideDown{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:translateY(0);}}
 .detail-panel.open{display:block;}
@@ -109,51 +95,39 @@ tbody td{padding:.75rem 1rem;vertical-align:middle;}
 .detail-meta span b{color:var(--text);}
 .stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:1.1rem;}
 .stat-box{background:var(--surface);padding:.85rem 1rem;}
-.stat-box .val{font-family:'JetBrains Mono',monospace;font-size:1.25rem;font-weight:700;color:var(--cyan);margin-bottom:.2rem;}
-.stat-box .lbl{font-family:'JetBrains Mono',monospace;font-size:.57rem;color:var(--muted);letter-spacing:.07em;text-transform:uppercase;}
+.stat-val{font-family:'JetBrains Mono',monospace;font-size:1.25rem;font-weight:700;color:var(--cyan);margin-bottom:.2rem;}
+.stat-lbl{font-family:'JetBrains Mono',monospace;font-size:.57rem;color:var(--muted);letter-spacing:.07em;text-transform:uppercase;}
 .findings-table{width:100%;border-collapse:collapse;font-size:.77rem;margin-bottom:1.1rem;}
 .findings-table th{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;padding:.55rem .7rem;text-align:left;border-bottom:1px solid var(--border);}
 .findings-table td{padding:.58rem .7rem;border-bottom:1px solid rgba(30,42,66,.5);color:var(--text);}
 .findings-table td:last-child{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--green);}
-
-/* DRIVE / FIGURES */
 .drive-section{margin-top:1.1rem;}
 .drive-header{display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;flex-wrap:wrap;}
-.drive-label{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--blue);letter-spacing:.15em;text-transform:uppercase;}
+.drive-lbl{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--blue);letter-spacing:.15em;text-transform:uppercase;}
 .drive-input{font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.3rem .7rem;border:1px solid var(--border);background:var(--surface);color:var(--text);outline:none;min-width:260px;border-radius:2px;}
 .drive-input:focus{border-color:var(--cyan);}
 .drive-input::placeholder{color:var(--dim);}
-.drive-load-btn{font-family:'JetBrains Mono',monospace;font-size:.68rem;padding:.3rem .8rem;border:1px solid var(--blue);background:rgba(59,130,246,.08);color:var(--blue);cursor:pointer;border-radius:2px;transition:all .2s;}
-.drive-load-btn:hover{border-color:var(--cyan);color:var(--cyan);}
-.drive-status{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--muted);}
-.drive-status.loading{color:var(--amber);}
-.drive-status.ok{color:var(--green);}
-.drive-status.err{color:var(--red);}
+.drive-btn{font-family:'JetBrains Mono',monospace;font-size:.68rem;padding:.3rem .8rem;border:1px solid var(--blue);background:rgba(59,130,246,.08);color:var(--blue);cursor:pointer;border-radius:2px;transition:all .2s;}
+.drive-btn:hover{border-color:var(--cyan);color:var(--cyan);}
+.drive-stat{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--muted);}
+.drive-stat.loading{color:var(--amber);}.drive-stat.ok{color:var(--green);}.drive-stat.err{color:var(--red);}
 .figures-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);}
 .fig-box{background:var(--surface);padding:.8rem;}
-.fig-box img{width:100%;height:auto;display:block;border-radius:1px;}
+.fig-box img{width:100%;height:auto;display:block;}
 .fig-caption{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--muted);margin-top:.4rem;}
-.no-figs{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--dim);padding:.5rem 0;}
-.embedded-figs-label{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--blue);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.6rem;}
-
+.no-figs{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--dim);padding:.4rem 0;}
+.emb-label{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--blue);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.6rem;}
 .notes-box{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--amber);padding:.9rem 1.1rem;font-size:.78rem;color:var(--muted);line-height:1.6;margin-top:1rem;}
 .notes-box b{color:var(--amber);}
-
-/* METHOD CARDS */
 .method-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);}
 .method-card{background:var(--card);padding:1.2rem;}
 .method-card .icon{font-size:1.1rem;margin-bottom:.5rem;}
 .method-card h4{font-size:.86rem;font-weight:700;margin-bottom:.35rem;}
 .method-card p{font-size:.77rem;color:var(--muted);line-height:1.6;}
-
-/* TREE */
-.tree{font-family:'JetBrains Mono',monospace;font-size:.77rem;line-height:2;color:var(--muted);background:var(--card);border:1px solid var(--border);padding:1.2rem 1.6rem;}
-.tree .dir{color:var(--cyan);}.tree .file{color:var(--text);}.tree .note{color:var(--dim);}.tree .hl{color:var(--blue);}
-
 footer{border-top:1px solid var(--border);padding:1.75rem 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem;}
 footer p{font-family:'JetBrains Mono',monospace;font-size:.67rem;color:var(--muted);}
-.dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);margin-right:.4rem;animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+.dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);margin-right:.4rem;animation:dotpulse 2s infinite;}
+@keyframes dotpulse{0%,100%{opacity:1;}50%{opacity:.3;}}
 .fade-in{opacity:0;transform:translateY(14px);animation:fadeUp .55s ease forwards;}
 @keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
 .d1{animation-delay:.1s;}.d2{animation-delay:.2s;}.d3{animation-delay:.3s;}
@@ -162,17 +136,14 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:.67rem;color:var(--mut
 </style>
 </head>
 <body>
-
-<nav>
-  <div class="wrap nav-inner">
-    <a class="nav-logo" href="#">Mo · Data Analyst</a>
-    <ul class="nav-links">
-      <li><a href="#stack">Stack</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#approach">Approach</a></li>
-    </ul>
-  </div>
-</nav>
+<nav><div class="wrap nav-inner">
+  <a class="nav-logo" href="#">Mo · Data Analyst</a>
+  <ul class="nav-links">
+    <li><a href="#stack">Stack</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#approach">Approach</a></li>
+  </ul>
+</div></nav>
 
 <div class="wrap">
   <div class="hero">
@@ -220,25 +191,14 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:.67rem;color:var(--mut
     <p class="section-label">// 02 — Projects</p>
     <h2 class="section-title">Analysis Portfolio <span class="count-badge" id="proj-count"></span></h2>
 
-    <!-- ══ IMPORT PANEL ══ -->
-    <div class="import-panel">
-      <div class="import-title">⬆ Import Projects from Excel</div>
-      <div class="import-row">
-        <button class="import-btn primary" onclick="document.getElementById('file-input').click()">
-          📂 Choose Excel File (.xlsx)
-        </button>
-        <button class="import-btn" onclick="downloadTemplate()">⬇ Download Template</button>
-        <button class="import-btn" onclick="resetToDefault()" style="color:var(--muted);">↺ Reset to Default</button>
-        <span class="import-status" id="import-status">No file loaded</span>
-      </div>
-      <input type="file" id="file-input" accept=".xlsx,.xls" onchange="loadExcel(this)"/>
-      <p class="template-note">
-        Template columns: <b>id · title · domain · tool · n · methods · highlight · status · driveFolderId · notes</b><br/>
-        methods = comma-separated &nbsp;|&nbsp; status = done / wip / pending &nbsp;|&nbsp; driveFolderId = Google Drive folder ID (optional)
-      </p>
+    <!-- data source status bar -->
+    <div class="data-bar">
+      <div class="data-bar-dot" id="bar-dot"></div>
+      <span class="data-bar-label">Data source:</span>
+      <span class="data-bar-file">projects.xlsx</span>
+      <span class="data-bar-status loading" id="bar-status">Loading...</span>
     </div>
 
-    <!-- ══ FILTER BAR ══ -->
     <div class="filter-bar">
       <input class="search-box" id="search" placeholder="Search projects..." oninput="renderTable()"/>
       <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
@@ -249,12 +209,10 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:.67rem;color:var(--mut
 
     <div class="table-wrap">
       <table>
-        <thead>
-          <tr>
-            <th>#</th><th>Project</th><th>Domain</th><th>Tool</th>
-            <th>n</th><th>Methods</th><th>Highlight</th><th>Status</th>
-          </tr>
-        </thead>
+        <thead><tr>
+          <th>#</th><th>Project</th><th>Domain</th><th>Tool</th>
+          <th>n</th><th>Methods</th><th>Highlight</th><th>Status</th>
+        </tr></thead>
         <tbody id="proj-tbody"></tbody>
       </table>
     </div>
@@ -268,26 +226,25 @@ footer p{font-family:'JetBrains Mono',monospace;font-size:.67rem;color:var(--mut
       <div class="method-card"><div class="icon">⚠️</div><h4>Assumption Checking First</h4><p>Expected cell counts, residuals, and collinearity verified before any result is reported.</p></div>
       <div class="method-card"><div class="icon">📉</div><h4>Honest R²</h4><p>A weak model is reported as weak — with clear explanation of missing variance drivers.</p></div>
       <div class="method-card"><div class="icon">📏</div><h4>Effect Size + p-values</h4><p>Statistical significance alone does not determine importance. Both always reported together.</p></div>
-      <div class="method-card"><div class="icon">🔢</div><h4>Multiple-Response Handling</h4><p>Items converted to binary dummies before frequency analysis, never treated as single-choice.</p></div>
+      <div class="method-card"><div class="icon">🔢</div><h4>Multiple-Response Handling</h4><p>Items converted to binary dummies before frequency analysis.</p></div>
       <div class="method-card"><div class="icon">📊</div><h4>Ceiling / Floor Effects</h4><p>Flagged when present — they reduce correlation and regression power.</p></div>
       <div class="method-card"><div class="icon">🗂️</div><h4>Reproducible Outputs</h4><p>Each project documented with full methods, figures, and outputs.</p></div>
     </div>
   </section>
 
   <footer>
-    <p><span class="dot"></span>Active · Updated as projects complete</p>
+    <p><span class="dot"></span>Active · Data from projects.xlsx</p>
     <p>IBM SPSS · R Studio · Community Health · Sudan</p>
   </footer>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════
-     GOOGLE APPS SCRIPT URL
-     Deploy your Apps Script once, paste the URL below.
-     See SETUP.md for instructions.
-════════════════════════════════════════════════════════ -->
 <script>
-const DRIVE_API = "https://script.google.com/macros/s/AKfycbxdpvFwAhStdAFQ75qCuuvDn-b9bdUwILhh1Fxp_tvnCW0aFnCSC_2Cy_ER294aNreWHA/exec";
+// ═══════════════════════════════════════════════════════════
+//  CONFIG
+// ═══════════════════════════════════════════════════════════
+const EXCEL_FILE = "projects.xlsx";   // must be in same folder as index.html
+const DRIVE_API  = "https://script.google.com/macros/s/YOUR_SCRIPT_ID_HERE/exec";
 
-// ── Embedded fallback images for project 01 ──────────────
+// ── Embedded base64 figures (project 01) ────────────────────
 const EMBEDDED = {
-  "fig1_war_exposure.png":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABTcAAALfCAYAAAC0BPbCAAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjEwLjgsIGh0dHBzOi8vbWF0cGxvd
+  "fig1_war_exposure.png":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABTcAAALfCAYAAAC0BPbCAAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjEwLjgsIGh0dHBzOi8vbWF0cGxvdGxpYi5vcmcvwVt1zgAAAAlwSFlzAAAXEgAAFxIBZ5/SUgABAABJREFUeJzs3XVYVNkbB/Dv0N0oIigqdoFgJ3aLjY2dq/5W3XV1ddUNe3XtFru7uxVRREFFUCxElO6G+f3BMnK5M5SBs3w/z+PzzD333HPP3AmZ977nHIlUKpWCiIiIiIiIiIiISMmoFHUHiIiIiIiIiIiIiAqDwU0iIiIiIiIiIiJSSgxuEhERERERERERkVJicJOIiIiIiIiIiIiUEoObREREREREREREpJQY3CQiIiIiIiIiIiKlxOAmERERERERERERKSUGN4mIiIiIiIiIiEgpMbhJRERERERERERESonBTSIiIiIiIiIiIlJKDG4SERERERERERGRUmJwk4iIiIiIiIiIiJQSg5tERERERERERESklBjcJCIiIiIiIiIiIqWkVtQdICIi+l5ERkWjTuP2kEqlsrIqlSrg7NFdcutPm/kHDhw5KSgbPXwgfpkyQW79es07IyQ0TLatp6uDR+4XoKqq+gV6//UtW7UR/6zZXODj9ritRsN6Dl+hR/Rf9T74I5q06Y6MjAzRvlVL/0DnDq2LoFdUULFx8Th64gyuXL+DZ34vEBkdjfS0dBgY6MHAwACmxkaoVLE8qlWphGpVKqJ2zWpQUVHe3Aubag0E2/Xr2mPftrVF1Jv/piGjJuPaTXfZ9vaN/6BZ4/pF2KPvw6vXb3HL/T58nvjimX8AwiMiER0dg4TEJGhracLExBgVypVFo/oOcO7SHuZmpvlq98r12zhx+gI8vXwQGhYOADA3M4VDnVro0qE1nJo1ylc7KSmpOHTsFM5fug4//wCERURCW0sLpSzM0bhhXfTu3hlVKtkqPH7RsrVYs3GbbPvnH8dh7IjB+To3ERUPDG4SERH9y9jIEBXKlcWLl69lZf4vXiE6JhaGBvqi+vcfPMpXGQC8eftOENgEAPvaNZQmsEn0LR05cVZuYBMADh8/w+CmErh52wP/mz5XFhDJLiw8EmHhkXj56g3uZfvOfHDrLEyMjUT1G7d2RtD7D7Lt0pYWuHXx6NfodrE1ZcY8HDp6WlB248JhWJe2LKIeiV26elMQ2KxdsxoDm//a6LYHu/cfkbsvLj4BcfEJeBsYhCvXb2Ppyg2Y+dNEDHLpqbC9qKho/DB1Fm7c9hDtexP4Dm8C3+HwsdNo1qQBVi6eB0NDA4VtPX76DD9MmYVXbwIF5SkpKYiOicEz/wC47TyA4YNd8MvUCZBIJKI2hg9xwdad+5CYmAQAWLXODT27dUQJczOF5yWi4kV5b40SERF9BXUdagu2MzIy8MDLR1QvLDxC9Ic6APg88UNySoqo/J6coKdjndqiMiICjhw/o3Df9VvuCAuP+Ia9oYLyefIMw8dPkxvYJCoMqVSKxcuFWbDjR7kWTWeUXFJSMmbNW4zzl67L3R8bFw+XoePlBjZzun7THf2GTkB8fILc/U98/dF/2A9y/17KLj09HRu27sIvv82Xu9/UxBj9ejvLtuMTErBy3dY8+0dExQczN4mIiLJxrFMbew4cE5Tde/AITs2FQ6/ue3nLPT4lJQXePk9R18FOWF9OcLPufyC4Wc/RHgNdeuRap
