@@ -37,7 +37,7 @@ const projects = [
     methods: ["Descriptive Stats", "Cross-tabs", "Logistic Regression", "Chi-Square"],
     highlight: "91.3% believe water causes disease · 51.2% rely on wells · OR=19.1 for treatment-seeking",
     status: "done",
-    driveFolderId: "0Z9Y8X7W6V5U4T3S2R1Q-exampleID2", // Assign your real folder ID here
+    driveFolderId: "1eNiSkuNN4tO6Ra-Sjtp7LCVh-EfwMNQD", // Assign your real folder ID here
     detail: {
       sample: "80 households",
       location: "Omdurman, Sudan",
