@@ -10,7 +10,7 @@ const projects = [
     methods: ["Chi-Square", "Spearman ρ", "Regression", "ANOVA"],
     highlight: "97.7% good knowledge · 4.3% sought professional help",
     status: "done",
-    driveFolderId: "1A2B3C4D5E6F7G8H9I0J-exampleID1", // Assign your real folder ID here
+    driveFolderId: "17jWktMt70So8-yBEu3wPsaxPMgcotzHR", // Assign your real folder ID here
     detail: {
       sample: "300 students",
       location: "Omdurman, Sudan",
