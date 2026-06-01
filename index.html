@@ -333,20 +333,6 @@ function renderProjects() {
     });
   }
 
-  const totalRows = 45;
-  const currentCount = (typeof projects !== 'undefined') ? projects.length : 0;
-  for (let i = currentCount + 1; i <= totalRows; i++) {
-    const row = document.createElement('tr');
-    row.className = 'dim-row';
-    row.innerHTML = `
-      <td class="proj-num">${String(i).padStart(2, '0')}</td>
-      <td><span style="color:var(--dim)">Coming soon</span></td>
-      <td class="proj-domain">—</td><td class="proj-n">—</td>
-      <td>—</td><td class="hl-cell">—</td>
-      <td class="status-pending">· pending</td>
-    `;
-    tbody.appendChild(row);
-  }
 }
 
 // ============================================================
